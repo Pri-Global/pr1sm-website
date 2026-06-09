@@ -143,18 +143,18 @@ export default function Request() {
               </>
             )}
 
-            <div className="flex gap-3 pt-4">
+            <div className="flex flex-col sm:flex-row gap-3 pt-4">
               {step > 0 && (
-                <button type="button" onClick={() => setStep((s) => s - 1)} className="btn-secondary flex-1">
+                <button type="button" onClick={() => setStep((s) => s - 1)} className="btn-secondary flex-1 w-full">
                   Back
                 </button>
               )}
               {step < 3 ? (
-                <button type="button" onClick={() => setStep((s) => s + 1)} className="btn-primary flex-1">
+                <button type="button" onClick={() => setStep((s) => s + 1)} className="btn-primary flex-1 w-full">
                   Next Step
                 </button>
               ) : (
-                <button type="submit" className="btn-primary flex-1">Submit Request</button>
+                <button type="submit" className="btn-primary flex-1 w-full">Submit Request</button>
               )}
             </div>
           </form>

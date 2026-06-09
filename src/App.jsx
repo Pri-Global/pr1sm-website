@@ -2,6 +2,7 @@ import { Component } from 'react'
 import { BrowserRouter, useLocation, useRoutes, Navigate } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import ScrollToTop from './components/ScrollToTop'
+import SEO from './components/SEO'
 import SiteBackground from './components/animations/SiteBackground'
 import PrismCursor from './components/ui/PrismCursor'
 import Navbar from './components/layout/Navbar'
@@ -99,9 +100,10 @@ function Layout() {
     <ErrorBoundary>
       <SiteBackground />
       <PrismCursor />
+      <SEO />
       <ScrollToTop />
       <Navbar />
-      <main className="relative z-10">
+      <main className="relative z-10" id="main-content">
         <AnimatedRoutes />
       </main>
       <Footer />

@@ -38,28 +38,28 @@ export default function Home() {
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[350px] hero-glow-main" />
           <div className="absolute top-16 left-8 w-[250px] h-[250px] hero-glow-secondary" />
         </div>
-        <div className="relative z-10 container-wide section-padding pt-32 pb-20 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
+        <div className="relative z-10 container-wide section-padding pt-28 sm:pt-32 pb-16 sm:pb-20 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
             <div>
               <div className="eyebrow-badge mb-3">
                 <span className="eyebrow-dot" />
                 {hero.badge.line1}
               </div>
-              <p className="text-white/45 text-[10px] font-medium uppercase tracking-[0.12em] mb-6">
+              <p className="text-white/45 text-[10px] font-medium uppercase tracking-[0.12em] mb-4 sm:mb-6">
                 {hero.badge.line2}
               </p>
-              <h1 className="font-heading font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-[1.05] text-white">
+              <h1 className="font-heading font-extrabold text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-[1.05] text-white">
                 {hero.headline.line1}{' '}
                 <MorphingText words={morphWords} />
               </h1>
-              <p className="mt-4 font-heading text-xl md:text-2xl text-white/75">{hero.headline.sub}</p>
-              <p className="mt-6 text-lg text-white/60 leading-relaxed max-w-2xl">{hero.subheadline}</p>
+              <p className="mt-3 sm:mt-4 font-heading text-lg sm:text-xl md:text-2xl text-white/75">{hero.headline.sub}</p>
+              <p className="mt-4 sm:mt-6 text-base sm:text-lg text-white/60 leading-relaxed max-w-2xl">{hero.subheadline}</p>
 
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Button to="/request" variant="primary">
+              <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
+                <Button to="/request" variant="primary" className="btn-mobile-full !justify-center">
                   Book a Call <AnimatedIcon Icon={ArrowRight} size={18} />
                 </Button>
-                <Button to="/our-platform" variant="ghost">
+                <Button to="/our-platform" variant="ghost" className="btn-mobile-full !justify-center">
                   Explore Platform
                 </Button>
               </div>
@@ -192,16 +192,16 @@ export default function Home() {
       <section className="relative section-elevated section-padding text-white overflow-hidden">
         <GradientOrb color="purple" size={380} top="-80px" left="-100px" opacity={0.7} />
         <div className="relative z-10 container-wide">
-          <div className="flex items-end justify-between mb-10">
+          <div className="flex items-end justify-between gap-4 mb-8 sm:mb-10">
             <div>
               <SectionLabel>{testimonialPreview.label}</SectionLabel>
-              <h2 className="font-heading font-bold text-3xl md:text-4xl">{testimonialPreview.heading}</h2>
+              <h2 className="font-heading font-bold text-2xl sm:text-3xl md:text-4xl">{testimonialPreview.heading}</h2>
             </div>
-            <Link to="/testimonials" className="text-blue-light text-sm font-medium hover:text-white transition-colors hidden sm:block">
+            <Link to="/testimonials" className="text-blue-light text-sm font-medium hover:text-white transition-colors shrink-0">
               View all →
             </Link>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6">
             {testimonialPreview.items.map((t) => (
               <div key={t.name} className="card">
                 <TestimonialVideo src={t.videoUrl} name={t.name} className="mb-4" />

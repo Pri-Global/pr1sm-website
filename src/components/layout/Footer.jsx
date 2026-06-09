@@ -58,7 +58,7 @@ export default function Footer() {
             {subscribed ? (
               <p className="text-teal-light text-sm">Subscribed! Thank you.</p>
             ) : (
-              <form onSubmit={handleSubscribe} className="flex gap-2">
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2">
                 <input
                   type="email"
                   required
@@ -67,7 +67,7 @@ export default function Footer() {
                   placeholder="Email"
                   className="form-input flex-1 !py-2.5"
                 />
-                <button type="submit" className="btn-gradient text-sm !px-4 !py-2.5">Subscribe</button>
+                <button type="submit" className="btn-gradient text-sm !px-4 !py-2.5 w-full sm:w-auto">Subscribe</button>
               </form>
             )}
           </div>

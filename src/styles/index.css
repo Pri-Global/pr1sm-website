@@ -5,11 +5,14 @@
 @layer base {
   html {
     scroll-behavior: auto;
+    overflow-x: hidden;
   }
 
   body {
     background-color: #080e1e;
     color: #f2f0eb;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
     @apply font-body antialiased;
   }
 
@@ -114,7 +117,7 @@
   }
 
   .card-dark {
-    @apply card-glow p-6;
+    @apply card-glow p-4 sm:p-6;
   }
 
   .card-glow {
@@ -224,7 +227,7 @@
   }
 
   .section-padding {
-    @apply px-4 sm:px-6 lg:px-8 py-16 md:py-24;
+    @apply px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24;
   }
 
   .container-wide {
@@ -253,7 +256,7 @@
   }
 
   .stat-value {
-    @apply font-heading font-extrabold text-3xl md:text-[2rem];
+    @apply font-heading font-extrabold text-2xl sm:text-3xl md:text-[2rem];
     background: linear-gradient(135deg, #4169e1, #7b2fbe);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -454,6 +457,39 @@
     box-shadow:
       0 4px 24px rgba(0, 0, 0, 0.18),
       inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .btn-mobile-full {
+    @apply w-full sm:w-auto;
+  }
+}
+
+@media (max-width: 639px) {
+  .page-timeline::before {
+    left: 19px;
+    top: 20px;
+    bottom: 20px;
+  }
+
+  .hero-glow-main {
+    width: 100% !important;
+    max-width: 420px;
+    height: 280px !important;
+  }
+
+  .hero-glow-secondary {
+    width: 180px !important;
+    height: 180px !important;
+    left: 0 !important;
+  }
+
+  .marquee-wrapper::before,
+  .marquee-wrapper::after {
+    width: 48px;
+  }
+
+  .cta-panel .cta-panel-inner {
+    padding: 1.25rem;
   }
 }
 

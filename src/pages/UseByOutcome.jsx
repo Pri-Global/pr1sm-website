@@ -26,12 +26,12 @@ export default function UseByOutcome() {
                   className="role-card"
                   style={{ '--role-accent': accent.gradient }}
                 >
-                  <div className="flex items-start gap-4 mb-4">
+                  <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4 mb-4">
                     <span className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${accent.iconBg} ${accent.iconText}`}>
                       <AnimatedIcon Icon={Icon} size={20} />
                     </span>
-                    <div>
-                      <h3 className="font-heading font-semibold text-xl text-white">{outcome.title}</h3>
+                    <div className="min-w-0">
+                      <h3 className="font-heading font-semibold text-lg sm:text-xl text-white">{outcome.title}</h3>
                       <p className="mt-1 text-white/55 text-sm leading-relaxed">{outcome.description}</p>
                     </div>
                   </div>

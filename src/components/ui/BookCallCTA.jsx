@@ -16,31 +16,30 @@ export default function BookCallCTA({ heading, subheading, className = '' }) {
 
   return (
     <section className={`relative section-padding section-default overflow-hidden ${className}`}>
-      <GradientOrb color="blue" size={480} top="-120px" right="-100px" opacity={0.55} />
-      <GradientOrb color="purple" size={360} bottom="-80px" left="-60px" opacity={0.45} />
-      <GradientOrb color="gold" size={220} top="40%" left="45%" opacity={0.25} />
+      <GradientOrb color="blue" size={480} top="-120px" right="-100px" opacity={0.55} className="hidden sm:block" />
+      <GradientOrb color="purple" size={360} bottom="-80px" left="-60px" opacity={0.45} className="hidden sm:block" />
 
       <div className="container-wide relative z-10">
         <div className="cta-panel">
           <div className="cta-panel-grid absolute inset-0 opacity-[0.35]" aria-hidden="true" />
-          <div className="relative grid lg:grid-cols-[1.2fr_0.8fr] gap-10 lg:gap-14 items-center p-8 md:p-12 lg:p-14">
+          <div className="relative grid lg:grid-cols-[1.2fr_0.8fr] gap-6 sm:gap-8 lg:gap-14 items-center p-5 sm:p-8 md:p-12 lg:p-14">
             <div>
               <SectionLabel>Next Step</SectionLabel>
-              <h2 className="font-heading font-extrabold text-3xl md:text-4xl lg:text-[2.75rem] tracking-tight text-white leading-[1.1]">
+              <h2 className="font-heading font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] tracking-tight text-white leading-[1.15]">
                 {title}
               </h2>
-              <p className="mt-4 text-white/60 text-base md:text-lg leading-relaxed max-w-xl">{text}</p>
-              <div className="mt-6 flex flex-wrap gap-2">
+              <p className="mt-3 sm:mt-4 text-white/60 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl">{text}</p>
+              <div className="mt-4 sm:mt-6 flex flex-wrap gap-2">
                 {TRUST_PILLS.map((pill) => (
-                  <span key={pill} className="badge-blue !text-[9px] !tracking-[0.1em]">
+                  <span key={pill} className="badge-blue !text-[8px] sm:!text-[9px] !tracking-[0.1em]">
                     {pill}
                   </span>
                 ))}
               </div>
             </div>
 
-            <div className="flex flex-col gap-4">
-              <div className="rounded-xl border border-white/[0.08] bg-navy/50 p-5 md:p-6 backdrop-blur-sm">
+            <div className="flex flex-col gap-3 sm:gap-4">
+              <div className="rounded-xl border border-white/[0.08] bg-navy/50 p-4 sm:p-5 md:p-6 backdrop-blur-sm">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="w-10 h-10 rounded-lg btn-gradient flex items-center justify-center shrink-0">
                     <AnimatedIcon Icon={Calendar} size={18} className="text-white" />

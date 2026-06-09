@@ -14,6 +14,7 @@ export default function GradientOrb({
   left,
   right,
   opacity = 0.8,
+  className = '',
 }) {
   const reducedMotion = useReducedMotion()
   const style = {
@@ -29,7 +30,7 @@ export default function GradientOrb({
 
   return (
     <motion.div
-      className="absolute pointer-events-none z-0 rounded-full"
+      className={`absolute pointer-events-none z-0 rounded-full ${className}`}
       style={style}
       animate={reducedMotion ? undefined : { y: [0, -20, 0], x: [0, 10, 0] }}
       transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
