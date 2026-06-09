@@ -269,6 +269,83 @@
     @apply rounded-2xl cta-animated-bg;
   }
 
+  .cta-panel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.25rem;
+    border: 0.5px solid rgba(65, 105, 225, 0.35);
+    background: linear-gradient(
+      135deg,
+      rgba(13, 27, 62, 0.92) 0%,
+      rgba(65, 105, 225, 0.12) 45%,
+      rgba(123, 47, 190, 0.1) 100%
+    );
+    box-shadow:
+      0 24px 64px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .cta-panel-grid {
+    background-image:
+      linear-gradient(rgba(65, 105, 225, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(65, 105, 225, 0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 100%);
+  }
+
+  .page-timeline {
+    position: relative;
+  }
+
+  .page-timeline::before {
+    content: '';
+    position: absolute;
+    left: 23px;
+    top: 24px;
+    bottom: 24px;
+    width: 1px;
+    background: linear-gradient(180deg, rgba(65, 105, 225, 0.6), rgba(123, 47, 190, 0.4), transparent);
+  }
+
+  .use-case-card {
+    @apply card-dark h-full flex flex-col;
+    border-top: 2px solid var(--uc-accent, rgba(65, 105, 225, 0.5));
+  }
+
+  .use-case-card .uc-label {
+    @apply text-[10px] font-medium uppercase tracking-[0.12em] mb-1;
+    color: var(--uc-accent-text, #7ba7ff);
+  }
+
+  .role-card {
+    @apply card-dark h-full relative overflow-hidden;
+  }
+
+  .role-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--role-accent, linear-gradient(90deg, #4169e1, #7b2fbe));
+    opacity: 0.85;
+  }
+
+  .mission-card {
+    @apply card-dark relative overflow-hidden;
+  }
+
+  .mission-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--mission-accent, linear-gradient(180deg, #4169e1, #7b2fbe));
+  }
+
   .cta-animated-bg {
     background: linear-gradient(
       135deg,

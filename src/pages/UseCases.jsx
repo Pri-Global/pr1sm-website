@@ -1,40 +1,54 @@
 import PageHero from '../components/ui/PageHero'
+import SectionHeader from '../components/ui/SectionHeader'
 import BookCallCTA from '../components/ui/BookCallCTA'
+import GradientOrb from '../components/animations/GradientOrb'
 import { StaggerContainer, StaggerItem } from '../components/animations/StaggerGroup'
 import { useCaseCategories } from '../data/useCases'
-
-const dotClasses = ['feature-dot-blue', 'feature-dot-purple', 'feature-dot-gold', 'feature-dot-teal']
+import { accentStyles, dotClasses } from '../utils/pageIcons'
 
 export default function UseCases() {
   return (
     <>
       <PageHero
-        title="Use Cases"
-        subtitle="Real problems. Practical solutions. Measurable outcomes."
+        eyebrow="Use Cases"
+        title="Real problems. Practical solutions."
+        subtitle="Measurable outcomes across every department — from the boardroom to the front line."
       />
-      <section className="section-alt section-padding space-y-16">
-        <div className="container-wide space-y-16">
-          {useCaseCategories.map((cat) => (
-            <div key={cat.id}>
-              <div className="mb-8">
-                <h2 className="font-heading font-bold text-2xl md:text-3xl">{cat.title}</h2>
-                <p className="text-blue-light mt-1">{cat.tagline}</p>
-              </div>
-              <div className="grid lg:grid-cols-3 gap-6">
+
+      {useCaseCategories.map((cat, catIndex) => {
+        const accent = accentStyles[cat.accent] || accentStyles.blue
+        const isAlt = catIndex % 2 === 0
+
+        return (
+          <section
+            key={cat.id}
+            className={`relative section-padding overflow-hidden ${isAlt ? 'section-alt' : 'section-default'}`}
+          >
+            {catIndex % 3 === 0 && (
+              <GradientOrb color={cat.accent === 'gold' ? 'gold' : cat.accent} size={400} top="-80px" right="-60px" opacity={0.4} />
+            )}
+            <div className="relative z-10 container-wide">
+              {catIndex > 0 && <div className="gradient-divider mb-12 md:mb-16" />}
+              <SectionHeader label={cat.tagline} title={cat.title} />
+              <div className="grid lg:grid-cols-3 gap-5 md:gap-6">
                 {cat.useCases.map((uc) => (
-                  <div key={uc.title} className="card">
-                    <h3 className="font-heading font-semibold text-lg">{uc.title}</h3>
-                    <div className="mt-4 space-y-3 text-sm">
+                  <div
+                    key={uc.title}
+                    className="use-case-card"
+                    style={{ '--uc-accent': accent.border, '--uc-accent-text': accent.text }}
+                  >
+                    <h3 className="font-heading font-semibold text-lg text-white">{uc.title}</h3>
+                    <div className="mt-5 space-y-4 text-sm flex-1">
                       <div>
-                        <p className="font-medium text-white">Problem</p>
-                        <p className="text-white/50 mt-1">{uc.problem}</p>
+                        <p className="uc-label">Problem</p>
+                        <p className="text-white/55 leading-relaxed">{uc.problem}</p>
                       </div>
                       <div>
-                        <p className="font-medium text-white">Solution</p>
-                        <StaggerContainer className="mt-1 space-y-2">
+                        <p className="uc-label">Solution</p>
+                        <StaggerContainer className="mt-2 space-y-2">
                           {uc.solution.map((s, si) => (
                             <StaggerItem key={s}>
-                              <li className="feature-item !p-2 text-white/50 text-sm list-none">
+                              <li className="feature-item !p-2.5 text-white/60 text-sm list-none">
                                 <span className={dotClasses[si % dotClasses.length]} />
                                 {s}
                               </li>
@@ -43,11 +57,11 @@ export default function UseCases() {
                         </StaggerContainer>
                       </div>
                       <div>
-                        <p className="font-medium text-white">Outcomes</p>
-                        <StaggerContainer className="mt-1 space-y-2">
+                        <p className="uc-label">Outcomes</p>
+                        <StaggerContainer className="mt-2 space-y-2">
                           {uc.outcomes.map((o, oi) => (
                             <StaggerItem key={o}>
-                              <li className="feature-item !p-2 text-blue-light text-sm list-none">
+                              <li className="feature-item !p-2.5 text-sm list-none" style={{ color: accent.text }}>
                                 <span className={dotClasses[(oi + 1) % dotClasses.length]} />
                                 {o}
                               </li>
@@ -60,10 +74,14 @@ export default function UseCases() {
                 ))}
               </div>
             </div>
-          ))}
-        </div>
-      </section>
-      <BookCallCTA />
+          </section>
+        )
+      })}
+
+      <BookCallCTA
+        heading="Don't see your use case?"
+        subheading="PR1SM adapts to your industry, systems, and goals. Let's map it together."
+      />
     </>
   )
 }

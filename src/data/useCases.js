@@ -1,33 +1,46 @@
 export const useByRole = {
   heading: 'Use PR1SM.AI by Role',
   subheading: 'Solutions tailored to the way you work.',
+  eyebrow: 'By Role',
   roles: [
     {
+      icon: 'Crown',
+      accent: 'blue',
       title: 'Executive Leaders',
       description: 'Make smarter decisions and drive business impact.',
       bullets: ['Executive Dashboards', 'Strategic Insights', 'Performance Tracking'],
     },
     {
+      icon: 'Settings',
+      accent: 'purple',
       title: 'Operations Managers',
       description: 'Optimize processes and improve operational efficiency.',
       bullets: ['Process Optimization', 'Real-time Monitoring', 'Resource Management'],
     },
     {
+      icon: 'Cpu',
+      accent: 'teal',
       title: 'IT Managers',
       description: 'Deliver reliable services and maximize system performance.',
       bullets: ['Infrastructure Monitoring', 'Incident Management', 'Service Reliability'],
     },
     {
+      icon: 'DollarSign',
+      accent: 'gold',
       title: 'Finance Managers',
       description: 'Improve financial performance and ensure accountability.',
       bullets: ['Budget Tracking', 'Financial Reporting', 'Cost Optimization'],
     },
     {
+      icon: 'Kanban',
+      accent: 'blue',
       title: 'Project Managers',
       description: 'Deliver projects on time, on scope, and on budget.',
       bullets: ['Project Planning', 'Progress Tracking', 'Risk Management'],
     },
     {
+      icon: 'Heart',
+      accent: 'purple',
       title: 'Healthcare Professionals',
       description: 'Enhance patient care and operational outcomes.',
       bullets: ['Patient Monitoring', 'Care Coordination', 'Compliance Tracking'],
@@ -42,33 +55,46 @@ export const useByRole = {
 export const useByOutcome = {
   heading: 'Use PR1SM.AI by Outcome',
   subheading: 'Drive measurable results that matter.',
+  eyebrow: 'By Outcome',
   outcomes: [
     {
+      icon: 'Gauge',
+      accent: 'blue',
       title: 'Increase Efficiency',
       description: 'Streamline operations and get more done.',
       bullets: ['Process Automation', 'Workflow Optimization', 'Time Savings'],
     },
     {
+      icon: 'PiggyBank',
+      accent: 'gold',
       title: 'Reduce Costs',
       description: 'Lower operating costs and improve margins.',
       bullets: ['Cost Optimization', 'Resource Efficiency', 'Waste Reduction'],
     },
     {
+      icon: 'TrendingUp',
+      accent: 'teal',
       title: 'Improve Performance',
       description: 'Boost productivity and achieve better results.',
       bullets: ['Performance Monitoring', 'KPI Tracking', 'Continuous Improvement'],
     },
     {
+      icon: 'AlertTriangle',
+      accent: 'purple',
       title: 'Manage Risk',
       description: 'Identify risks early and strengthen compliance.',
       bullets: ['Risk Assessment', 'Compliance Management', 'Audit & Reporting'],
     },
     {
+      icon: 'Smile',
+      accent: 'blue',
       title: 'Enhance Customer Experience',
       description: 'Deliver exceptional experiences that drive loyalty.',
       bullets: ['Customer Insights', 'Service Optimization', 'Satisfaction Tracking'],
     },
     {
+      icon: 'Lightbulb',
+      accent: 'gold',
       title: 'Drive Innovation',
       description: 'Turn insights into new ideas and market opportunities.',
       bullets: ['Data Insights', 'Innovation Management', 'Strategic Planning'],
@@ -83,6 +109,7 @@ export const useByOutcome = {
 export const useCaseCategories = [
   {
     id: 'executive',
+    accent: 'blue',
     title: 'Executive Decision Intelligence',
     tagline: 'Smarter decisions. Greater impact.',
     useCases: [
@@ -108,6 +135,7 @@ export const useCaseCategories = [
   },
   {
     id: 'operational',
+    accent: 'purple',
     title: 'Operational Efficiency & Automation',
     tagline: 'Optimize processes. Drive results.',
     useCases: [
@@ -133,6 +161,7 @@ export const useCaseCategories = [
   },
   {
     id: 'unified',
+    accent: 'teal',
     title: 'Unified Systems & Secure AI Layer',
     tagline: 'Connect, secure, and scale with confidence.',
     useCases: [
@@ -158,6 +187,7 @@ export const useCaseCategories = [
   },
   {
     id: 'financial',
+    accent: 'gold',
     title: 'Financial Clarity & Margin Control',
     tagline: 'Better visibility. Stronger financial performance.',
     useCases: [
@@ -183,6 +213,7 @@ export const useCaseCategories = [
   },
   {
     id: 'project',
+    accent: 'blue',
     title: 'Project Intelligence & Delivery Control',
     tagline: 'Deliver projects on time, on scope, and on budget.',
     useCases: [
@@ -208,6 +239,7 @@ export const useCaseCategories = [
   },
   {
     id: 'patient',
+    accent: 'purple',
     title: 'Patient & Operational Intelligence',
     tagline: 'Better care. Smarter operations. Lower risk.',
     useCases: [
