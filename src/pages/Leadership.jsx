@@ -19,7 +19,7 @@ export default function LeadershipPage() {
     <>
       <PageHero title={leadership.heading} subtitle={leadership.subheading} />
 
-      <section className="relative section-alt section-padding overflow-hidden">
+      <section className="relative section-alt section-padding overflow-x-clip">
         <GradientOrb color="blue" size={420} top="-60px" right="-80px" opacity={0.6} />
         <div className="relative z-10 container-wide">
           <SectionHeader label="Executive Team" title="Leadership" />
@@ -29,7 +29,7 @@ export default function LeadershipPage() {
 
       <div className="gradient-divider" />
 
-      <section className="relative section-default section-padding overflow-hidden">
+      <section className="relative section-default section-padding overflow-x-clip">
         <GradientOrb color="purple" size={360} bottom="-40px" left="-100px" opacity={0.5} />
         <div className="relative z-10 container-wide">
           <SectionHeader label="Builders & Operators" title="The Team" />

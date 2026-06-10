@@ -13,7 +13,7 @@ export default function SecurityAndTrust() {
     <>
       <PageHero eyebrow={security.eyebrow} title={security.heading} subtitle={security.subheading} />
 
-      <section className="relative section-alt section-padding overflow-hidden">
+      <section className="relative section-alt section-padding overflow-x-clip">
         <GradientOrb color="teal" size={380} top="-60px" right="-80px" opacity={0.4} />
         <div className="relative z-10 container-wide">
           <SectionHeader label="Enterprise Security" title="Built for the most demanding environments" centered />
@@ -37,7 +37,7 @@ export default function SecurityAndTrust() {
 
       <div className="gradient-divider" />
 
-      <section className="relative section-elevated section-padding text-white overflow-hidden">
+      <section className="relative section-elevated section-padding text-white overflow-x-clip">
         <GradientOrb color="blue" size={340} bottom="-80px" left="-60px" opacity={0.35} />
         <div className="relative z-10 container-wide max-w-3xl mx-auto">
           <SectionHeader

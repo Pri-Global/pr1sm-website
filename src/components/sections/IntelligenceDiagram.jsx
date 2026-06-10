@@ -308,10 +308,10 @@ export default function IntelligenceDiagram({ layout = 'wide' }) {
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(100%,520px)] h-[280px] md:h-[360px] rounded-full bg-[radial-gradient(circle,rgba(65,105,225,0.08),transparent_70%)] pointer-events-none" />
       <div
         ref={containerRef}
-        className={`relative grid grid-cols-3 items-center w-full diagram-grid ${
+        className={`relative grid grid-cols-1 md:grid-cols-3 items-center w-full diagram-grid ${
           isWide
-            ? 'gap-3 md:gap-5 xl:gap-10 2xl:gap-14 min-h-[300px] md:min-h-[360px] xl:min-h-[420px]'
-            : 'gap-2 lg:gap-3 min-h-[280px] lg:min-h-[320px]'
+            ? 'gap-6 md:gap-5 xl:gap-10 2xl:gap-14 min-h-0 md:min-h-[360px] xl:min-h-[420px]'
+            : 'gap-4 md:gap-3 min-h-0 md:min-h-[320px]'
         }`}
       >
         <DiagramLines
@@ -325,7 +325,7 @@ export default function IntelligenceDiagram({ layout = 'wide' }) {
         />
 
         <motion.div
-          className="relative z-[2] flex flex-col gap-2 md:gap-2.5 xl:gap-3"
+          className="relative z-[2] grid grid-cols-2 md:flex md:flex-col gap-2 md:gap-2.5 xl:gap-3 w-full"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -342,7 +342,7 @@ export default function IntelligenceDiagram({ layout = 'wide' }) {
               onFocus={() => setActiveNode(`in-${i}`)}
               onBlur={() => setActiveNode(null)}
               tabIndex={0}
-              className={`diagram-node diagram-node-input group flex items-center gap-2.5 rounded-xl px-3 py-2 md:px-3.5 md:py-2.5 xl:px-4 xl:py-3 transition-all duration-300 cursor-default outline-none ${
+              className={`diagram-node diagram-node-input group flex items-center gap-2 md:gap-2.5 rounded-xl px-2.5 py-2 sm:px-3 md:px-3.5 md:py-2.5 xl:px-4 xl:py-3 transition-all duration-300 cursor-default outline-none w-full ${
                 activeNode === `in-${i}` ? 'diagram-node-active-blue' : ''
               }`}
               whileHover={{ scale: 1.03, y: -2 }}
@@ -350,14 +350,14 @@ export default function IntelligenceDiagram({ layout = 'wide' }) {
               <span className="diagram-node-icon">
                 <AnimatedIcon Icon={Icon} size={14} className="text-blue md:w-4 md:h-4" />
               </span>
-              <span className="text-white/75 text-[11px] md:text-xs xl:text-sm font-body leading-tight">
+              <span className="text-white/75 text-[10px] sm:text-[11px] md:text-xs xl:text-sm font-body leading-tight">
                 {label}
               </span>
             </motion.div>
           ))}
         </motion.div>
 
-        <div className="relative z-[2] flex flex-col items-center justify-center gap-2 md:gap-3 xl:gap-4 self-center px-1">
+        <div className="relative z-[2] flex flex-col items-center justify-center gap-2 md:gap-3 xl:gap-4 self-center px-1 py-2 md:py-0 w-full">
           <motion.div
             className="relative flex items-center justify-center"
             onMouseEnter={() => setActiveNode('hub')}
@@ -403,7 +403,7 @@ export default function IntelligenceDiagram({ layout = 'wide' }) {
         </div>
 
         <motion.div
-          className="relative z-[2] flex flex-col gap-2 md:gap-2.5 xl:gap-3"
+          className="relative z-[2] grid grid-cols-2 md:flex md:flex-col gap-2 md:gap-2.5 xl:gap-3 w-full"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -420,7 +420,7 @@ export default function IntelligenceDiagram({ layout = 'wide' }) {
               onFocus={() => setActiveNode(`out-${i}`)}
               onBlur={() => setActiveNode(null)}
               tabIndex={0}
-              className={`diagram-node diagram-node-output group flex items-center gap-2.5 rounded-xl px-3 py-2 md:px-3.5 md:py-2.5 xl:px-4 xl:py-3 transition-all duration-300 cursor-default outline-none ${
+              className={`diagram-node diagram-node-output group flex items-center gap-2 md:gap-2.5 rounded-xl px-2.5 py-2 sm:px-3 md:px-3.5 md:py-2.5 xl:px-4 xl:py-3 transition-all duration-300 cursor-default outline-none w-full ${
                 activeNode === `out-${i}` ? 'diagram-node-active-purple' : ''
               }`}
               whileHover={{ scale: 1.03, y: -2 }}
@@ -428,7 +428,7 @@ export default function IntelligenceDiagram({ layout = 'wide' }) {
               <span className="diagram-node-icon">
                 <AnimatedIcon Icon={Icon} size={14} className="text-purple md:w-4 md:h-4" />
               </span>
-              <span className="text-white/75 text-[11px] md:text-xs xl:text-sm font-body leading-tight">
+              <span className="text-white/75 text-[10px] sm:text-[11px] md:text-xs xl:text-sm font-body leading-tight">
                 {label}
               </span>
             </motion.div>

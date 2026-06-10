@@ -105,7 +105,7 @@ export default function HeroContent() {
           data-hero="mascot"
           className="flex justify-center items-end w-full max-w-sm sm:max-w-md mx-auto lg:max-w-none lg:justify-end xl:justify-center"
         >
-          <PrismaMascot variant="hello" size="xl" className="sm:!h-56 md:!h-64 lg:!h-72 xl:!h-[22rem] 2xl:!h-80" />
+          <PrismaMascot variant="hello" size="xl" className="!h-44 sm:!h-56 md:!h-64 lg:!h-72 xl:!h-[22rem] 2xl:!h-80" />
         </div>
       </div>
     </div>

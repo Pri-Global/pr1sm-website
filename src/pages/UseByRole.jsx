@@ -12,7 +12,7 @@ export default function UseByRole() {
     <>
       <PageHero eyebrow={useByRole.eyebrow} title={useByRole.heading} subtitle={useByRole.subheading} />
 
-      <section className="relative section-alt section-padding overflow-hidden">
+      <section className="relative section-alt section-padding overflow-x-clip">
         <GradientOrb color="blue" size={420} top="-80px" left="-60px" opacity={0.45} />
         <div className="relative z-10 container-wide">
           <SectionHeader label="Your Role" title="AI that speaks your language" centered />

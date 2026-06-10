@@ -96,7 +96,7 @@ export default function Navbar() {
     >
       <nav className="container-wide flex items-center justify-between h-16 md:h-20 px-4 sm:px-6 lg:px-8">
         <div ref={logoRef}>
-          <Logo to="/" onClick={closeMobile} variant="icon" size="nav" className="scale-110 sm:scale-125 md:scale-[1.45] origin-left" />
+          <Logo to="/" onClick={closeMobile} variant="icon" size="nav" className="scale-100 sm:scale-110 md:scale-[1.35] origin-left" />
         </div>
 
         <div ref={navRef} className="hidden lg:flex items-center gap-6">

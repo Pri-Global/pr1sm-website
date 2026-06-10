@@ -148,7 +148,7 @@ export default function Home() {
       <section className="relative section-elevated section-padding text-white overflow-x-clip">
         <FloatingOrbs count={2} />
         <div className="relative z-10 container-wide">
-          <SectionReveal type="rise" className="flex items-end justify-between gap-4 mb-8 sm:mb-10">
+          <SectionReveal type="rise" className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 sm:gap-4 mb-8 sm:mb-10">
             <div>
               <SectionLabel>{testimonialPreview.label}</SectionLabel>
               <h2 className="font-heading font-bold text-2xl sm:text-3xl md:text-4xl">{testimonialPreview.heading}</h2>

@@ -44,6 +44,10 @@ export default function TeamMemberCard({ person, index = 0 }) {
             {person.role}
           </p>
 
+          <p className="text-white/55 text-xs leading-relaxed line-clamp-3 mt-2 md:hidden">
+            {person.bio}
+          </p>
+
           <p className="hidden md:block text-white/55 text-xs leading-relaxed max-h-0 mt-0 opacity-0 overflow-hidden group-hover:max-h-24 group-hover:mt-2 group-hover:opacity-100 transition-all duration-500 ease-out">
             {person.bio}
           </p>

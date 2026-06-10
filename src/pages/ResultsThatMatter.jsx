@@ -11,7 +11,7 @@ export default function ResultsThatMatter() {
     <>
       <PageHero eyebrow={results.eyebrow} title={results.heading} subtitle={results.subheading} />
 
-      <section className="relative stats-bar section-padding overflow-hidden">
+      <section className="relative stats-bar section-padding overflow-x-clip">
         <GradientOrb color="gold" size={300} top="50%" left="50%" opacity={0.2} />
         <div className="relative z-10 container-wide">
           <SectionHeader label="Proof Points" title="Numbers that speak for themselves" centered />

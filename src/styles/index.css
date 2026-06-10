@@ -313,7 +313,7 @@
   }
 
   .section-padding {
-    @apply px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-24;
+    @apply px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-24;
   }
 
   .container-wide {
@@ -545,7 +545,6 @@
     background: rgba(65, 105, 225, 0.12);
     border-color: rgba(65, 105, 225, 0.45);
     box-shadow: 0 0 20px rgba(65, 105, 225, 0.15);
-    transform: translateX(4px);
   }
 
   .diagram-node-output:hover,
@@ -553,7 +552,18 @@
     background: rgba(123, 47, 190, 0.12);
     border-color: rgba(123, 47, 190, 0.45);
     box-shadow: 0 0 20px rgba(123, 47, 190, 0.15);
-    transform: translateX(-4px);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .diagram-node-input:hover,
+    .diagram-node-active-blue {
+      transform: translateX(4px);
+    }
+
+    .diagram-node-output:hover,
+    .diagram-node-active-purple {
+      transform: translateX(-4px);
+    }
   }
 
   .diagram-node-icon {
@@ -794,8 +804,23 @@
     width: 48px;
   }
 
-  .cta-panel .cta-panel-inner {
-    padding: 1.25rem;
+  .diagram-grid {
+    max-width: 100%;
+  }
+
+  .diagram-hub-orbit,
+  .diagram-hub-orbit-2 {
+    display: none;
+  }
+
+  .stat-value {
+    font-size: 1.5rem !important;
+  }
+
+  .nav-shell-glass nav,
+  .nav-shell-transparent nav {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
   }
 }
 

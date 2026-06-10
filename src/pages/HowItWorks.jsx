@@ -62,7 +62,7 @@ export default function HowItWorks() {
 
       <div className="gradient-divider" />
 
-      <section className="relative section-elevated section-padding text-white overflow-hidden">
+      <section className="relative section-elevated section-padding text-white overflow-x-clip">
         <GradientOrb color="purple" size={380} bottom="-60px" right="-80px" opacity={0.45} />
         <div className="relative z-10 container-wide">
           <SectionHeader

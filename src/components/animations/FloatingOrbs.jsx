@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
+import useIsDesktop from '../../hooks/useIsDesktop'
 
 const ORBS = [
   { color: '#4169E1', size: 500, top: '5%', left: '-8%', x: [0, 100, -50, 0], y: [0, -80, 40, 0], duration: 20 },
@@ -9,7 +10,10 @@ const ORBS = [
 
 export default function FloatingOrbs({ count = 4, className = '' }) {
   const reducedMotion = useReducedMotion()
-  const visible = ORBS.slice(0, count)
+  const isDesktop = useIsDesktop(768)
+  const effectiveCount = isDesktop ? count : Math.min(count, 1)
+  const sizeScale = isDesktop ? 1 : 0.5
+  const visible = ORBS.slice(0, effectiveCount)
 
   if (reducedMotion) return null
 
@@ -20,15 +24,15 @@ export default function FloatingOrbs({ count = 4, className = '' }) {
           key={i}
           className="absolute rounded-full"
           style={{
-            width: orb.size,
-            height: orb.size,
+            width: orb.size * sizeScale,
+            height: orb.size * sizeScale,
             top: orb.top,
             left: orb.left,
             right: orb.right,
             bottom: orb.bottom,
             background: orb.color,
-            filter: `blur(${80 + i * 10}px)`,
-            opacity: 0.08 + i * 0.01,
+            filter: `blur(${Math.round((80 + i * 10) * sizeScale)}px)`,
+            opacity: isDesktop ? 0.08 + i * 0.01 : 0.06,
           }}
           animate={{ x: orb.x, y: orb.y }}
           transition={{ duration: orb.duration, repeat: Infinity, ease: 'easeInOut' }}

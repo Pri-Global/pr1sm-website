@@ -12,7 +12,9 @@ export function LenisProvider({ children }) {
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduced) return undefined
+    const coarse = window.matchMedia('(pointer: coarse)').matches
+    const narrow = window.matchMedia('(max-width: 767px)').matches
+    if (reduced || coarse || narrow) return undefined
 
     const instance = new Lenis({
       duration: 1.4,

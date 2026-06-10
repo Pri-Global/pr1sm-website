@@ -40,7 +40,7 @@ export default function BookCallCTA({ heading, subheading, className = '' }) {
               <p className="mt-3 sm:mt-4 text-white/60 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl">{text}</p>
               <div className="mt-4 sm:mt-6 flex flex-wrap gap-2">
                 {TRUST_PILLS.map((pill) => (
-                  <span key={pill} className="badge-blue !text-[8px] sm:!text-[9px] !tracking-[0.1em]">
+                  <span key={pill} className="badge-blue !text-[9px] sm:!text-[9px] !tracking-[0.1em]">
                     {pill}
                   </span>
                 ))}

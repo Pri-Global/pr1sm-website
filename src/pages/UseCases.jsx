@@ -22,7 +22,7 @@ export default function UseCases() {
         return (
           <section
             key={cat.id}
-            className={`relative section-padding overflow-hidden ${isAlt ? 'section-alt' : 'section-default'}`}
+            className={`relative section-padding overflow-x-clip ${isAlt ? 'section-alt' : 'section-default'}`}
           >
             {catIndex % 3 === 0 && (
               <GradientOrb color={cat.accent === 'gold' ? 'gold' : cat.accent} size={400} top="-80px" right="-60px" opacity={0.4} />

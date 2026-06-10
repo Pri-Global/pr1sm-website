@@ -12,7 +12,7 @@ export default function UseByOutcome() {
     <>
       <PageHero eyebrow={useByOutcome.eyebrow} title={useByOutcome.heading} subtitle={useByOutcome.subheading} />
 
-      <section className="relative section-default section-padding overflow-hidden">
+      <section className="relative section-default section-padding overflow-x-clip">
         <GradientOrb color="purple" size={400} bottom="-80px" right="-60px" opacity={0.45} />
         <div className="relative z-10 container-wide">
           <SectionHeader label="Your Goals" title="Start with the outcome, not the technology" centered />

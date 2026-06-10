@@ -14,7 +14,7 @@ export default function OurPlatform() {
     <>
       <PageHero eyebrow={platform.eyebrow} title={platform.heading} subtitle={platform.subheading} />
 
-      <section className="relative section-alt section-padding overflow-hidden">
+      <section className="relative section-alt section-padding overflow-x-clip">
         <GradientOrb color="blue" size={400} top="-80px" right="-60px" opacity={0.5} />
         <div className="relative z-10 container-wide">
           <SectionHeader label="Capabilities" title="Six pillars of enterprise intelligence" centered />
@@ -42,7 +42,7 @@ export default function OurPlatform() {
 
       <div className="gradient-divider" />
 
-      <section className="relative section-default section-padding overflow-hidden">
+      <section className="relative section-default section-padding overflow-x-clip">
         <GradientOrb color="purple" size={360} bottom="-40px" left="-100px" opacity={0.4} />
         <div className="relative z-10 container-wide grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
           <div>

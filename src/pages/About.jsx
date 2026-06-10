@@ -13,7 +13,7 @@ export default function About() {
     <>
       <PageHero eyebrow={about.eyebrow} title={about.heading} subtitle={about.tagline} />
 
-      <section className="relative section-alt section-padding overflow-hidden">
+      <section className="relative section-alt section-padding overflow-x-clip">
         <GradientOrb color="blue" size={400} top="-80px" right="-60px" opacity={0.5} />
         <div className="relative z-10 container-wide max-w-3xl">
           <SectionHeader
@@ -26,7 +26,7 @@ export default function About() {
 
       <div className="gradient-divider" />
 
-      <section className="relative section-default section-padding overflow-hidden">
+      <section className="relative section-default section-padding overflow-x-clip">
         <GradientOrb color="purple" size={320} bottom="-60px" left="-80px" opacity={0.4} />
         <div className="relative z-10 container-wide">
           <SectionHeader label="At a Glance" title="Built on experience. Designed for outcomes." centered />
