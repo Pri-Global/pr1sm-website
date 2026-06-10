@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import Logo from '../ui/Logo'
 import { footer } from '../../data/team'
 import { footerLegalLinks } from '../../data/legal'
@@ -12,6 +13,11 @@ function LinkedInIcon({ size = 20 }) {
   )
 }
 
+const linkMotion = {
+  whileHover: { x: 4, color: '#7ba7ff' },
+  transition: { duration: 0.2 },
+}
+
 export default function Footer() {
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
@@ -22,11 +28,12 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative z-10 bg-navy3/85 text-white border-t border-white/[0.06]">
+    <footer className="relative z-10 footer-dark text-white border-t border-transparent">
+      <div className="gradient-divider" />
       <div className="section-padding container-wide">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           <div className="flex flex-col items-start text-left">
-            <Logo to="/" variant="full" size="footer" className="mb-1" />
+            <Logo to="/" variant="full" size="footer" className="mb-1 footer-logo-glow transition-all duration-300" />
             <p className="mt-4 font-heading font-bold text-lg tracking-wide text-white/80">
               {footer.tagline}
             </p>
@@ -43,11 +50,19 @@ export default function Footer() {
               Quick Links
             </h4>
             <div className="flex flex-col gap-2">
-              <Link to="/about" className="text-sm text-white/50 hover:text-white/80 transition-colors">About</Link>
-              <Link to="/use-cases" className="text-sm text-white/50 hover:text-white/80 transition-colors">Use Cases</Link>
-              <Link to="/leadership" className="text-sm text-white/50 hover:text-white/80 transition-colors">Leadership</Link>
-              <Link to="/testimonials" className="text-sm text-white/50 hover:text-white/80 transition-colors">Testimonials</Link>
-              <Link to="/request" className="text-sm text-white/50 hover:text-white/80 transition-colors">Request</Link>
+              {[
+                { to: '/about', label: 'About' },
+                { to: '/use-cases', label: 'Use Cases' },
+                { to: '/leadership', label: 'Leadership' },
+                { to: '/testimonials', label: 'Testimonials' },
+                { to: '/request', label: 'Request' },
+              ].map((link) => (
+                <motion.div key={link.to} {...linkMotion}>
+                  <Link to={link.to} className="footer-link text-sm text-white/50 inline-block">
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
             </div>
           </div>
 
@@ -67,7 +82,7 @@ export default function Footer() {
                   placeholder="Email"
                   className="form-input flex-1 !py-2.5"
                 />
-                <button type="submit" className="btn-gradient text-sm !px-4 !py-2.5 w-full sm:w-auto">Subscribe</button>
+                <button type="submit" className="btn-gradient btn-shine text-sm !px-4 !py-2.5 w-full sm:w-auto">Subscribe</button>
               </form>
             )}
           </div>
@@ -77,16 +92,16 @@ export default function Footer() {
 
         <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
-            <p className="text-sm text-white/35">© {new Date().getFullYear()} PR1SM. All rights reserved.</p>
+            <p className="text-sm text-white/30">© {new Date().getFullYear()} PR1SM. All rights reserved.</p>
             <div className="flex flex-wrap gap-4">
               {footerLegalLinks.map((link) => (
-                <Link key={link.to} to={link.to} className="text-xs text-white/35 hover:text-white/60 transition-colors">
+                <Link key={link.to} to={link.to} className="footer-link text-xs text-white/30 inline-block">
                   {link.label}
                 </Link>
               ))}
             </div>
           </div>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-blue transition-colors">
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="footer-social text-white">
             <LinkedInIcon size={20} />
           </a>
         </div>

@@ -1,40 +1,74 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { NavLink, Link } from 'react-router-dom'
+import { motion, useSpring, useTransform } from 'framer-motion'
+import gsap from 'gsap'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import Logo from '../ui/Logo'
 import AnimatedIcon from '../ui/AnimatedIcon'
 import Button from '../ui/Button'
+import { useLenis } from '../../context/LenisContext'
 import { aboutDropdown, navLinks, BOOK_CALL_ROUTE } from '../../data/navigation'
 
 export default function Navbar() {
+  const lenis = useLenis()
   const [scrolled, setScrolled] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [aboutOpen, setAboutOpen] = useState(false)
   const scrolledRef = useRef(false)
   const aboutRef = useRef(null)
+  const logoRef = useRef(null)
+  const navRef = useRef(null)
+
+  const springProgress = useSpring(scrollProgress, { stiffness: 100, damping: 30, mass: 0.5 })
+  const progressScale = useTransform(springProgress, (v) => v)
 
   useEffect(() => {
-    let rafId = null
+    const onScroll = ({ scroll, limit }) => {
+      const next = scroll > 50
+      if (next !== scrolledRef.current) {
+        scrolledRef.current = next
+        setScrolled(next)
+      }
+      setScrollProgress(limit > 0 ? scroll / limit : 0)
+    }
+
+    if (lenis) {
+      lenis.on('scroll', onScroll)
+      return () => lenis.off('scroll', onScroll)
+    }
+
     const handleScroll = () => {
-      if (rafId !== null) return
-      rafId = requestAnimationFrame(() => {
-        rafId = null
-        const next = window.scrollY > 24
-        if (next !== scrolledRef.current) {
-          scrolledRef.current = next
-          setScrolled(next)
-        }
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight
-        setScrollProgress(docHeight > 0 ? Math.min(window.scrollY / docHeight, 1) : 0)
-      })
+      const next = window.scrollY > 50
+      if (next !== scrolledRef.current) {
+        scrolledRef.current = next
+        setScrolled(next)
+      }
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight
+      setScrollProgress(docHeight > 0 ? Math.min(window.scrollY / docHeight, 1) : 0)
     }
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      if (rafId !== null) cancelAnimationFrame(rafId)
-    }
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lenis])
+
+  useEffect(() => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduced) return undefined
+
+    const ctx = gsap.context(() => {
+      gsap.from(logoRef.current, { opacity: 0, x: -20, duration: 0.8, ease: 'power3.out', delay: 0.1 })
+      gsap.from(navRef.current?.children || [], {
+        opacity: 0,
+        y: -10,
+        duration: 0.5,
+        stagger: 0.06,
+        ease: 'power2.out',
+        delay: 0.25,
+      })
+    })
+
+    return () => ctx.revert()
   }, [])
 
   useEffect(() => {
@@ -61,9 +95,11 @@ export default function Navbar() {
       }`}
     >
       <nav className="container-wide flex items-center justify-between h-16 md:h-20 px-4 sm:px-6 lg:px-8">
-        <Logo to="/" onClick={closeMobile} variant="icon" size="nav" className="scale-110 sm:scale-125 md:scale-[1.45] origin-left" />
+        <div ref={logoRef}>
+          <Logo to="/" onClick={closeMobile} variant="icon" size="nav" className="scale-110 sm:scale-125 md:scale-[1.45] origin-left" />
+        </div>
 
-        <div className="hidden lg:flex items-center gap-6">
+        <div ref={navRef} className="hidden lg:flex items-center gap-6">
           <div className="relative" ref={aboutRef}>
             <button
               type="button"
@@ -152,9 +188,9 @@ export default function Navbar() {
         </div>
       )}
 
-      <div
-        className="h-[1.5px] bg-gradient-to-r from-[#4169E1] via-[#7B2FBE] to-[#D4AF37] origin-left transition-transform duration-150"
-        style={{ transform: `scaleX(${scrollProgress})` }}
+      <motion.div
+        className="h-[1.5px] bg-gradient-to-r from-[#4169E1] via-[#7B2FBE] to-[#D4AF37] origin-left"
+        style={{ scaleX: progressScale }}
       />
     </header>
   )

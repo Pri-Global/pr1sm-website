@@ -2,7 +2,8 @@ import { ArrowRight, Calendar, Sparkles } from 'lucide-react'
 import Button from './Button'
 import SectionLabel from './SectionLabel'
 import AnimatedIcon from './AnimatedIcon'
-import GradientOrb from '../animations/GradientOrb'
+import FloatingOrbs from '../animations/FloatingOrbs'
+import { SectionReveal, SplitHeadline } from '../animations/SectionReveal'
 
 const DEFAULT_HEADING = 'Ready to see PR1SM in action?'
 const DEFAULT_SUBHEADING =
@@ -13,21 +14,29 @@ const TRUST_PILLS = ['29+ Years Enterprise', 'SOC 2 Compliant', '2–4 Week Setu
 export default function BookCallCTA({ heading, subheading, className = '' }) {
   const title = heading || DEFAULT_HEADING
   const text = subheading || DEFAULT_SUBHEADING
+  const titleLines = title.split('. ').map((part, i, arr) => (
+    i < arr.length - 1 ? `${part}.` : part
+  ))
 
   return (
     <section className={`relative section-padding section-default overflow-x-clip ${className}`}>
-      <GradientOrb color="blue" size={480} top="-120px" right="-100px" opacity={0.55} className="hidden sm:block" />
-      <GradientOrb color="purple" size={360} bottom="-80px" left="-60px" opacity={0.45} className="hidden sm:block" />
+      <FloatingOrbs count={3} />
+      <div className="absolute inset-0 pointer-events-none cta-bg-animated" aria-hidden="true">
+        <div className="absolute inset-0 bg-[#080e1e]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.15),transparent_65%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_50%,rgba(123,47,190,0.1),transparent_60%)]" />
+      </div>
 
-      <div className="container-wide relative z-10">
-        <div className="cta-panel relative">
+      <SectionReveal type="scale" className="container-wide relative z-10">
+        <div className="cta-panel cta-panel-cinematic relative glow-blue">
           <div className="cta-panel-grid absolute inset-0 opacity-[0.35]" aria-hidden="true" />
           <div className="relative grid lg:grid-cols-[1.2fr_0.8fr] gap-6 sm:gap-8 lg:gap-14 items-center p-5 sm:p-8 md:p-12 lg:p-14">
             <div>
               <SectionLabel>Next Step</SectionLabel>
-              <h2 className="font-heading font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] tracking-tight text-white leading-[1.15]">
-                {title}
-              </h2>
+              <SplitHeadline
+                lines={titleLines.length > 1 ? titleLines : [title]}
+                className="font-heading font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] tracking-tight text-gradient-animated leading-[1.15]"
+              />
               <p className="mt-3 sm:mt-4 text-white/60 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl">{text}</p>
               <div className="mt-4 sm:mt-6 flex flex-wrap gap-2">
                 {TRUST_PILLS.map((pill) => (
@@ -49,10 +58,10 @@ export default function BookCallCTA({ heading, subheading, className = '' }) {
                     <p className="text-white/45 text-xs">No commitment required</p>
                   </div>
                 </div>
-                <Button to="/request" variant="primary" className="w-full !justify-center">
+                <Button to="/request" variant="primary" className="btn-shine w-full !justify-center !px-10 !py-4 !text-lg glow-blue">
                   Book a Call <AnimatedIcon Icon={ArrowRight} size={18} />
                 </Button>
-                <Button to="/our-platform" variant="ghost" className="w-full !justify-center mt-3">
+                <Button to="/our-platform" variant="ghost" className="btn-glass w-full !justify-center mt-3">
                   Explore Platform
                 </Button>
               </div>
@@ -63,7 +72,7 @@ export default function BookCallCTA({ heading, subheading, className = '' }) {
             </div>
           </div>
         </div>
-      </div>
+      </SectionReveal>
     </section>
   )
 }

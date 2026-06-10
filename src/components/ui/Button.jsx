@@ -1,9 +1,20 @@
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 const variants = {
   primary: 'btn-primary group',
   secondary: 'btn-secondary group',
   ghost: 'btn-ghost group',
+}
+
+const MotionLink = motion.create(Link)
+const MotionAnchor = motion.create('a')
+const MotionButton = motion.create('button')
+
+const motionProps = {
+  whileHover: { scale: 1.03 },
+  whileTap: { scale: 0.97 },
+  transition: { type: 'spring', stiffness: 400, damping: 25 },
 }
 
 export default function Button({
@@ -19,23 +30,23 @@ export default function Button({
 
   if (to) {
     return (
-      <Link to={to} className={classes} {...props}>
+      <MotionLink to={to} className={classes} {...motionProps} {...props}>
         {children}
-      </Link>
+      </MotionLink>
     )
   }
 
   if (href) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={classes} {...props}>
+      <MotionAnchor href={href} target="_blank" rel="noopener noreferrer" className={classes} {...motionProps} {...props}>
         {children}
-      </a>
+      </MotionAnchor>
     )
   }
 
   return (
-    <button type={type} className={classes} {...props}>
+    <MotionButton type={type} className={classes} {...motionProps} {...props}>
       {children}
-    </button>
+    </MotionButton>
   )
 }

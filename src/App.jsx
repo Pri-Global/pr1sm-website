@@ -4,11 +4,12 @@ import { AnimatePresence } from 'framer-motion'
 import ScrollToTop from './components/ScrollToTop'
 import SEO from './components/SEO'
 import SiteBackground from './components/animations/SiteBackground'
-import PrismCursor from './components/ui/PrismCursor'
+import CustomCursor from './components/ui/CustomCursor'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import CookieConsent from './components/ui/CookieConsent'
-import PageWrapper from './components/animations/PageWrapper'
+import PageTransition from './components/ui/PageTransition'
+import { LenisProvider } from './context/LenisContext'
 import Home from './pages/Home'
 import About from './pages/About'
 import HowItWorks from './pages/HowItWorks'
@@ -88,9 +89,9 @@ function AnimatedRoutes() {
 
   return (
     <AnimatePresence mode="wait">
-      <PageWrapper key={location.pathname}>
+      <PageTransition key={location.pathname}>
         {element}
-      </PageWrapper>
+      </PageTransition>
     </AnimatePresence>
   )
 }
@@ -98,16 +99,18 @@ function AnimatedRoutes() {
 function Layout() {
   return (
     <ErrorBoundary>
-      <SiteBackground />
-      <PrismCursor />
-      <SEO />
-      <ScrollToTop />
-      <Navbar />
-      <main className="relative z-10" id="main-content">
-        <AnimatedRoutes />
-      </main>
-      <Footer />
-      <CookieConsent />
+      <div className="noise">
+        <SiteBackground />
+        <CustomCursor />
+        <SEO />
+        <ScrollToTop />
+        <Navbar />
+        <main className="relative z-10" id="main-content">
+          <AnimatedRoutes />
+        </main>
+        <Footer />
+        <CookieConsent />
+      </div>
     </ErrorBoundary>
   )
 }
@@ -115,7 +118,9 @@ function Layout() {
 export default function App() {
   return (
     <BrowserRouter>
-      <Layout />
+      <LenisProvider>
+        <Layout />
+      </LenisProvider>
     </BrowserRouter>
   )
 }

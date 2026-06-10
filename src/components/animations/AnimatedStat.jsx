@@ -19,39 +19,55 @@ function formatCount(current, decimals, suffix) {
 function useCountUp(end, decimals, suffix, active) {
   const [display, setDisplay] = useState(formatCount(0, decimals, suffix))
   const [done, setDone] = useState(false)
+  const [flickering, setFlickering] = useState(false)
 
   useEffect(() => {
     if (!active) return undefined
 
     setDone(false)
+    setFlickering(true)
     setDisplay(formatCount(0, decimals, suffix))
 
-    const duration = 2200
-    const startTime = performance.now()
-    let rafId = null
-
-    const tick = (now) => {
-      const progress = Math.min((now - startTime) / duration, 1)
-      const eased = 1 - (1 - progress) ** 3
-      const current = end * eased
-      setDisplay(formatCount(current, decimals, suffix))
-
-      if (progress < 1) {
-        rafId = requestAnimationFrame(tick)
-      } else {
-        setDisplay(formatCount(end, decimals, suffix))
-        setDone(true)
+    let flickerCount = 0
+    const flickerInterval = setInterval(() => {
+      const random = Math.random() * end * 1.2
+      setDisplay(formatCount(random, decimals, suffix))
+      flickerCount += 1
+      if (flickerCount >= 6) {
+        clearInterval(flickerInterval)
+        setFlickering(false)
       }
-    }
+    }, 30)
 
-    rafId = requestAnimationFrame(tick)
+    const startDelay = setTimeout(() => {
+      const duration = 2200
+      const startTime = performance.now()
+      let rafId = null
+
+      const tick = (now) => {
+        const progress = Math.min((now - startTime) / duration, 1)
+        const eased = 1 - (1 - progress) ** 3
+        const current = end * eased
+        setDisplay(formatCount(current, decimals, suffix))
+
+        if (progress < 1) {
+          rafId = requestAnimationFrame(tick)
+        } else {
+          setDisplay(formatCount(end, decimals, suffix))
+          setDone(true)
+        }
+      }
+
+      rafId = requestAnimationFrame(tick)
+    }, 220)
 
     return () => {
-      if (rafId !== null) cancelAnimationFrame(rafId)
+      clearInterval(flickerInterval)
+      clearTimeout(startDelay)
     }
   }, [active, end, decimals, suffix])
 
-  return { display, done }
+  return { display, done, flickering }
 }
 
 export default function AnimatedStat({ value, index = 0, isText = false }) {

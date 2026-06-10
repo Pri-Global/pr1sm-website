@@ -177,13 +177,21 @@ function DiagramLines({
             stroke={active ? `url(#${filterId}-in-grad)` : '#4169E1'}
             strokeOpacity={active ? 0.85 : 0.28}
             strokeWidth={active ? 2 : 1}
-            initial={{ pathLength: 0, opacity: 0 }}
+            strokeDasharray="4 4"
             animate={
               inView
-                ? { pathLength: 1, opacity: 1 }
-                : { pathLength: 0, opacity: 0 }
+                ? {
+                    pathLength: 1,
+                    opacity: 1,
+                    strokeDashoffset: [0, -100],
+                  }
+                : { pathLength: 0, opacity: 0, strokeDashoffset: 0 }
             }
-            transition={{ duration: 1.1, delay: 0.2 + i * 0.08, ease: 'easeOut' }}
+            transition={{
+              pathLength: { duration: 1.1, delay: 0.2 + i * 0.08, ease: 'easeOut' },
+              opacity: { duration: 1.1, delay: 0.2 + i * 0.08, ease: 'easeOut' },
+              strokeDashoffset: { duration: 3, repeat: Infinity, ease: 'linear' },
+            }}
           />
         )
       })}
@@ -198,49 +206,61 @@ function DiagramLines({
             stroke={active ? `url(#${filterId}-out-grad)` : '#7B2FBE'}
             strokeOpacity={active ? 0.85 : 0.28}
             strokeWidth={active ? 2 : 1}
-            initial={{ pathLength: 0, opacity: 0 }}
+            strokeDasharray="4 4"
             animate={
               inView
-                ? { pathLength: 1, opacity: 1 }
-                : { pathLength: 0, opacity: 0 }
+                ? {
+                    pathLength: 1,
+                    opacity: 1,
+                    strokeDashoffset: [0, -100],
+                  }
+                : { pathLength: 0, opacity: 0, strokeDashoffset: 0 }
             }
-            transition={{ duration: 1.1, delay: 0.45 + i * 0.08, ease: 'easeOut' }}
+            transition={{
+              pathLength: { duration: 1.1, delay: 0.45 + i * 0.08, ease: 'easeOut' },
+              opacity: { duration: 1.1, delay: 0.45 + i * 0.08, ease: 'easeOut' },
+              strokeDashoffset: { duration: 3, repeat: Infinity, ease: 'linear', delay: i * 0.2 },
+            }}
           />
         )
       })}
 
-      {animateLines && inView && paths.inputs.map(({ dotPath }, i) => (
-        <motion.circle
-          key={`in-dot-${i}`}
-          r={activeNode && !isInputActive(i) && !hubActive ? 1.5 : 3}
-          fill="#7ba7ff"
-          filter={`url(#${filterId})`}
-          style={{ offsetPath: `path('${dotPath}')`, offsetRotate: '0deg' }}
-          animate={{ offsetDistance: ['0%', '100%'] }}
-          transition={{
-            duration: 1.8 + i * 0.15,
-            repeat: Infinity,
-            ease: 'linear',
-            delay: i * 0.25,
-          }}
-        />
+      {animateLines && inView && paths.inputs.flatMap(({ dotPath }, i) => (
+        [0, 0.33, 0.66].map((offset) => (
+          <motion.circle
+            key={`in-dot-${i}-${offset}`}
+            r={activeNode && !isInputActive(i) && !hubActive ? 1.5 : 3}
+            fill="#7ba7ff"
+            filter={`url(#${filterId})`}
+            style={{ offsetPath: `path('${dotPath}')`, offsetRotate: '0deg' }}
+            animate={{ offsetDistance: [`${offset * 100}%`, `${(offset + 1) * 100}%`] }}
+            transition={{
+              duration: 1.8 + i * 0.15,
+              repeat: Infinity,
+              ease: 'linear',
+              delay: i * 0.25,
+            }}
+          />
+        ))
       ))}
 
-      {animateLines && inView && paths.outputs.map(({ dotPath }, i) => (
-        <motion.circle
-          key={`out-dot-${i}`}
-          r={activeNode && !isOutputActive(i) && !hubActive ? 1.5 : 3}
-          fill="#c088f0"
-          filter={`url(#${filterId})`}
-          style={{ offsetPath: `path('${dotPath}')`, offsetRotate: '0deg' }}
-          animate={{ offsetDistance: ['0%', '100%'] }}
-          transition={{
-            duration: 1.8 + i * 0.15,
-            repeat: Infinity,
-            ease: 'linear',
-            delay: 0.4 + i * 0.3,
-          }}
-        />
+      {animateLines && inView && paths.outputs.flatMap(({ dotPath }, i) => (
+        [0, 0.33, 0.66].map((offset) => (
+          <motion.circle
+            key={`out-dot-${i}-${offset}`}
+            r={activeNode && !isOutputActive(i) && !hubActive ? 1.5 : 3}
+            fill="#c088f0"
+            filter={`url(#${filterId})`}
+            style={{ offsetPath: `path('${dotPath}')`, offsetRotate: '0deg' }}
+            animate={{ offsetDistance: [`${offset * 100}%`, `${(offset + 1) * 100}%`] }}
+            transition={{
+              duration: 1.8 + i * 0.15,
+              repeat: Infinity,
+              ease: 'linear',
+              delay: 0.4 + i * 0.3,
+            }}
+          />
+        ))
       ))}
     </svg>
   )
@@ -285,6 +305,7 @@ export default function IntelligenceDiagram({ layout = 'wide' }) {
         isWide ? 'max-w-none' : 'max-w-lg lg:max-w-none'
       }`}
     >
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(100%,520px)] h-[280px] md:h-[360px] rounded-full bg-[radial-gradient(circle,rgba(65,105,225,0.08),transparent_70%)] pointer-events-none" />
       <div
         ref={containerRef}
         className={`relative grid grid-cols-3 items-center w-full diagram-grid ${
@@ -324,6 +345,7 @@ export default function IntelligenceDiagram({ layout = 'wide' }) {
               className={`diagram-node diagram-node-input group flex items-center gap-2.5 rounded-xl px-3 py-2 md:px-3.5 md:py-2.5 xl:px-4 xl:py-3 transition-all duration-300 cursor-default outline-none ${
                 activeNode === `in-${i}` ? 'diagram-node-active-blue' : ''
               }`}
+              whileHover={{ scale: 1.03, y: -2 }}
             >
               <span className="diagram-node-icon">
                 <AnimatedIcon Icon={Icon} size={14} className="text-blue md:w-4 md:h-4" />
@@ -348,6 +370,12 @@ export default function IntelligenceDiagram({ layout = 'wide' }) {
             }
           >
             <div className="absolute w-28 h-28 md:w-36 md:h-36 xl:w-44 xl:h-44 rounded-full diagram-hub-glow" />
+            {!reducedMotion && (
+              <>
+                <div className="diagram-hub-orbit" aria-hidden="true" />
+                <div className="diagram-hub-orbit diagram-hub-orbit-2" aria-hidden="true" />
+              </>
+            )}
             <HubPulse reducedMotion={reducedMotion} />
             <div
               ref={hubRef}
@@ -395,6 +423,7 @@ export default function IntelligenceDiagram({ layout = 'wide' }) {
               className={`diagram-node diagram-node-output group flex items-center gap-2.5 rounded-xl px-3 py-2 md:px-3.5 md:py-2.5 xl:px-4 xl:py-3 transition-all duration-300 cursor-default outline-none ${
                 activeNode === `out-${i}` ? 'diagram-node-active-purple' : ''
               }`}
+              whileHover={{ scale: 1.03, y: -2 }}
             >
               <span className="diagram-node-icon">
                 <AnimatedIcon Icon={Icon} size={14} className="text-purple md:w-4 md:h-4" />

@@ -1,31 +1,21 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Shield, Plug, BarChart3 } from 'lucide-react'
-import Button from '../components/ui/Button'
 import SectionLabel from '../components/ui/SectionLabel'
 import DashboardMock from '../components/sections/DashboardMock'
 import BookCallCTA from '../components/ui/BookCallCTA'
-import AnimatedIcon from '../components/ui/AnimatedIcon'
-import MorphingText from '../components/animations/MorphingText'
-import GradientOrb from '../components/animations/GradientOrb'
+import HeroContent from '../components/sections/HeroContent'
+import HeroScene from '../components/animations/HeroScene'
+import FloatingOrbs from '../components/animations/FloatingOrbs'
 import AnimatedStat from '../components/animations/AnimatedStat'
 import TestimonialVideo from '../components/ui/TestimonialVideo'
 import PrismaMascot from '../components/ui/PrismaMascot'
+import TiltCard from '../components/ui/TiltCard'
+import AnimatedIcon from '../components/ui/AnimatedIcon'
 import { industryIconMap } from '../components/icons/IndustryIcons'
-import { StaggerContainer, StaggerItem } from '../components/animations/StaggerGroup'
+import { SectionReveal, StaggerGrid, StaggerGridItem } from '../components/animations/SectionReveal'
 import {
-  hero, trustedBy, industries, stats,
+  trustedBy, industries, stats,
   productOverview, dashboardPreview, testimonialPreview,
 } from '../data/home'
-
-const valueIcons = { Shield, Plug, BarChart3 }
-const dotClasses = ['feature-dot-blue', 'feature-dot-purple', 'feature-dot-gold']
-const morphWords = [
-  hero.headline.highlight,
-  'Your Business.',
-  'Your Team.',
-  'Your Data.',
-  'Your Future.',
-]
 
 export default function Home() {
   const marqueeLogos = [...trustedBy.logos, ...trustedBy.logos]
@@ -34,73 +24,30 @@ export default function Home() {
     <>
       {/* Hero */}
       <section className="relative min-h-screen flex items-center text-white overflow-x-clip">
-        <div className="absolute inset-0 pointer-events-none z-0">
+        <HeroScene />
+        <FloatingOrbs count={3} />
+        <div className="absolute inset-0 pointer-events-none z-[1]">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[350px] hero-glow-main" />
           <div className="absolute top-16 left-8 w-[250px] h-[250px] hero-glow-secondary" />
         </div>
-        <div className="relative z-10 container-wide section-padding pt-28 sm:pt-32 pb-16 sm:pb-20 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] xl:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 2xl:gap-20 items-center">
-            <div className="max-w-2xl xl:max-w-none">
-              <div className="eyebrow-badge mb-3">
-                <span className="eyebrow-dot" />
-                {hero.badge.line1}
-              </div>
-              <p className="text-white/45 text-[10px] font-medium uppercase tracking-[0.12em] mb-4 sm:mb-6">
-                {hero.badge.line2}
-              </p>
-              <h1 className="font-heading font-extrabold text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-[1.05] text-white">
-                {hero.headline.line1}{' '}
-                <MorphingText words={morphWords} />
-              </h1>
-              <p className="mt-3 sm:mt-4 font-heading text-lg sm:text-xl md:text-2xl text-white/75">{hero.headline.sub}</p>
-              <p className="mt-4 sm:mt-6 text-base sm:text-lg text-white/60 leading-relaxed max-w-2xl xl:max-w-3xl">{hero.subheadline}</p>
-
-              <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
-                <Button to="/request" variant="primary" className="btn-mobile-full !justify-center">
-                  Book a Call <AnimatedIcon Icon={ArrowRight} size={18} />
-                </Button>
-                <Button to="/our-platform" variant="ghost" className="btn-mobile-full !justify-center">
-                  Explore Platform
-                </Button>
-              </div>
-
-              <StaggerContainer className="mt-10 flex flex-wrap gap-4">
-                {hero.valueProps.map(({ icon, label }, i) => {
-                  const Icon = valueIcons[icon]
-                  return (
-                    <StaggerItem key={label}>
-                      <div className="feature-item group !inline-flex items-center gap-2 !p-3">
-                        <span className={dotClasses[i % dotClasses.length]} />
-                        <AnimatedIcon Icon={Icon} size={16} className="text-blue-light" />
-                        <span className="text-sm text-white/70">{label}</span>
-                      </div>
-                    </StaggerItem>
-                  )
-                })}
-              </StaggerContainer>
-            </div>
-
-            <div className="flex justify-center items-end w-full max-w-sm sm:max-w-md mx-auto lg:max-w-none lg:justify-end xl:justify-center">
-              <PrismaMascot variant="hello" size="xl" className="sm:!h-56 md:!h-64 lg:!h-72 xl:!h-[22rem] 2xl:!h-80" />
-            </div>
-          </div>
-        </div>
+        <HeroContent />
       </section>
 
       <div className="gradient-divider" />
 
       {/* Trusted By */}
-      <section className="section-default py-12 md:py-16">
+      <SectionReveal type="rise" className="section-default py-12 md:py-16 relative">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
         <div className="container-wide text-center">
           <SectionLabel>{trustedBy.heading}</SectionLabel>
           <div className="marquee-wrapper mt-8">
-            <div className="marquee-track items-center">
+            <div className="marquee-track marquee-track-slow items-center">
               {marqueeLogos.map((logo, i) => (
                 <div key={`${logo.name}-${i}`} className="marquee-item px-10 flex items-center justify-center">
                   <img
                     src={logo.logo}
                     alt={logo.name}
-                    className="h-10 sm:h-12 md:h-14 w-auto max-w-[180px] object-contain opacity-80 hover:opacity-100 transition-opacity"
+                    className="marquee-logo h-10 sm:h-12 md:h-14 w-auto max-w-[180px] object-contain"
                     loading="lazy"
                   />
                 </div>
@@ -108,61 +55,65 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+      </SectionReveal>
 
       <div className="gradient-divider" />
 
       {/* Industries */}
-      <section className="section-gradient section-padding text-white">
-        <div className="container-wide text-center mb-10">
+      <section className="relative section-gradient section-padding text-white overflow-x-clip">
+        <FloatingOrbs count={2} />
+        <SectionReveal type="rise" className="container-wide text-center mb-10 relative z-10">
           <h2 className="font-heading font-bold text-3xl md:text-4xl">{industries.heading}</h2>
-        </div>
-        <div className="container-wide grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3 md:gap-4 xl:gap-5">
+        </SectionReveal>
+        <StaggerGrid className="container-wide relative z-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3 md:gap-4 xl:gap-5">
           {industries.items.map((item) => {
             const Icon = industryIconMap[item.icon]
             return (
-              <div
-                key={item.label}
-                className="group flex flex-col items-center gap-3 rounded-2xl border border-teal/20 bg-teal/[0.06] px-4 py-5 md:py-6 transition-colors hover:border-teal/40 hover:bg-teal/[0.1]"
-              >
-                {Icon && (
-                  <AnimatedIcon
-                    Icon={Icon}
-                    size={28}
-                    className="text-teal shrink-0"
-                    strokeWidth={1.75}
-                  />
-                )}
-                <span className="text-sm md:text-base font-medium text-offwhite text-center leading-snug">
-                  {item.label}
-                </span>
-              </div>
+              <StaggerGridItem key={item.label}>
+                <TiltCard className="group flex flex-col items-center gap-3 rounded-2xl border border-teal/20 bg-teal/[0.06] px-4 py-5 md:py-6 transition-colors hover:border-teal/40 hover:bg-teal/[0.1] h-full">
+                  {Icon && (
+                    <AnimatedIcon
+                      Icon={Icon}
+                      size={28}
+                      className="text-teal shrink-0 relative z-[2]"
+                      strokeWidth={1.75}
+                    />
+                  )}
+                  <span className="text-sm md:text-base font-medium text-offwhite text-center leading-snug relative z-[2]">
+                    {item.label}
+                  </span>
+                </TiltCard>
+              </StaggerGridItem>
             )
           })}
-        </div>
+        </StaggerGrid>
       </section>
 
       <div className="gradient-divider" />
 
       {/* Stats */}
-      <section className="stats-bar section-padding !py-10 md:!py-12">
-        <div className="container-wide grid grid-cols-2 lg:grid-cols-4 gap-0 divide-y lg:divide-y-0 lg:divide-x divide-white/[0.06]">
+      <SectionReveal type="rise" className="stats-bar section-padding !py-10 md:!py-12 relative">
+        <FloatingOrbs count={1} />
+        <StaggerGrid className="container-wide relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-0">
           {stats.map((stat, i) => (
-            <div key={stat.line1} className="text-center px-4 py-4 lg:py-0">
-              <AnimatedStat value={stat.value} index={i} isText={stat.isText} />
-              <p className="stat-label mt-2">{stat.line1}</p>
-              <p className="stat-label">{stat.line2}</p>
-            </div>
+            <StaggerGridItem key={stat.line1}>
+              <div className="stat-card text-center px-4 py-4 lg:py-6 rounded-xl lg:rounded-none lg:border-0 lg:bg-transparent h-full">
+                <AnimatedStat value={stat.value} index={i} isText={stat.isText} />
+                <p className="stat-label mt-2">{stat.line1}</p>
+                <p className="stat-label">{stat.line2}</p>
+              </div>
+            </StaggerGridItem>
           ))}
-        </div>
-      </section>
+        </StaggerGrid>
+      </SectionReveal>
 
       <div className="gradient-divider" />
 
       {/* Product Video */}
       <section className="relative section-alt section-padding overflow-x-clip">
-        <GradientOrb color="gold" size={350} top="20%" right="-120px" opacity={0.5} />
-        <div className="relative z-10 container-wide grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] xl:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
+        <FloatingOrbs count={2} />
+        <SectionReveal type="reveal" className="relative z-10 container-wide grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] xl:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
           <div>
             <SectionLabel>{productOverview.label}</SectionLabel>
             <h2 className="font-heading font-bold text-2xl sm:text-3xl md:text-4xl tracking-tight text-white">{productOverview.heading}</h2>
@@ -174,30 +125,30 @@ export default function Home() {
           <TestimonialVideo
             src={productOverview.videoUrl}
             name="PR1SM in action"
-            className="rounded-2xl border border-blue/20"
+            className="rounded-2xl border border-blue/20 glow-blue"
           />
-        </div>
+        </SectionReveal>
       </section>
 
       <div className="gradient-divider" />
 
       {/* Dashboard Preview */}
-      <section className="section-default section-padding">
+      <SectionReveal type="rise" className="section-default section-padding">
         <div className="container-wide">
           <SectionLabel>{dashboardPreview.label}</SectionLabel>
           <h2 className="font-heading font-bold text-3xl md:text-4xl tracking-tight mb-2 text-white">{dashboardPreview.heading}</h2>
           <p className="text-white/50 mb-10 max-w-2xl">{dashboardPreview.body}</p>
           <DashboardMock />
         </div>
-      </section>
+      </SectionReveal>
 
       <div className="gradient-divider" />
 
       {/* Testimonials Preview */}
-      <section className="relative section-elevated section-padding text-white overflow-hidden">
-        <GradientOrb color="purple" size={380} top="-80px" left="-100px" opacity={0.7} />
+      <section className="relative section-elevated section-padding text-white overflow-x-clip">
+        <FloatingOrbs count={2} />
         <div className="relative z-10 container-wide">
-          <div className="flex items-end justify-between gap-4 mb-8 sm:mb-10">
+          <SectionReveal type="rise" className="flex items-end justify-between gap-4 mb-8 sm:mb-10">
             <div>
               <SectionLabel>{testimonialPreview.label}</SectionLabel>
               <h2 className="font-heading font-bold text-2xl sm:text-3xl md:text-4xl">{testimonialPreview.heading}</h2>
@@ -205,17 +156,19 @@ export default function Home() {
             <Link to="/testimonials" className="text-blue-light text-sm font-medium hover:text-white transition-colors shrink-0">
               View all →
             </Link>
-          </div>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6">
+          </SectionReveal>
+          <StaggerGrid className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6">
             {testimonialPreview.items.map((t) => (
-              <div key={t.name} className="card">
-                <TestimonialVideo src={t.videoUrl} name={t.name} className="mb-4" />
-                <h3 className="font-heading font-semibold text-white">{t.name}</h3>
-                <p className="text-blue-light text-sm mt-1">{t.role}</p>
-                <p className="text-white/45 text-sm">{t.company}</p>
-              </div>
+              <StaggerGridItem key={t.name}>
+                <TiltCard className="card h-full">
+                  <TestimonialVideo src={t.videoUrl} name={t.name} className="mb-4 relative z-[2]" />
+                  <h3 className="font-heading font-semibold text-white relative z-[2]">{t.name}</h3>
+                  <p className="text-blue-light text-sm mt-1 relative z-[2]">{t.role}</p>
+                  <p className="text-white/45 text-sm relative z-[2]">{t.company}</p>
+                </TiltCard>
+              </StaggerGridItem>
             ))}
-          </div>
+          </StaggerGrid>
         </div>
       </section>
 
