@@ -4,11 +4,10 @@ export const hero = {
     line2: '29+ YEARS IN ENTERPRISE TECHNOLOGY',
   },
   headline: {
-    line1: 'Turn your Data Into',
-    morphLines: [
-      'Decisions. Instantly.',
-      'Launch in weeks, not months.',
-      'Your Existing Systems. Unified by AI.',
+    phrases: [
+      { line1: 'Turn your Data Into', line2: 'Decisions. Instantly.' },
+      { line1: 'Launch in weeks,', line2: 'not months.' },
+      { line1: 'Your Existing Systems.', line2: 'Unified by AI.' },
     ],
   },
   subheadline:
