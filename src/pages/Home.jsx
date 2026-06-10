@@ -113,7 +113,7 @@ export default function Home() {
       {/* Product Video */}
       <section className="relative section-alt section-padding overflow-x-clip">
         <FloatingOrbs count={2} />
-        <SectionReveal type="reveal" className="relative z-10 container-wide grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] xl:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
+        <SectionReveal type="rise" className="relative z-10 container-wide grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] xl:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
           <div>
             <SectionLabel>{productOverview.label}</SectionLabel>
             <h2 className="font-heading font-bold text-2xl sm:text-3xl md:text-4xl tracking-tight text-white">{productOverview.heading}</h2>
