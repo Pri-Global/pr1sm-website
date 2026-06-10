@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import PageHero from '../components/ui/PageHero'
 import Button from '../components/ui/Button'
+import PrismaMascot from '../components/ui/PrismaMascot'
 import { requestForm } from '../data/team'
 
 export default function Request() {
@@ -44,7 +45,12 @@ export default function Request() {
     <>
       <PageHero title={requestForm.heading} subtitle={requestForm.subheading} />
       <section className="section-alt section-padding">
-        <div className="container-wide max-w-2xl mx-auto">
+        <div className="container-wide max-w-5xl mx-auto">
+          <div className="flex justify-center mb-6 lg:hidden">
+            <PrismaMascot variant="hello" size="md" floating />
+          </div>
+          <div className="grid lg:grid-cols-[minmax(0,1fr)_auto] gap-8 lg:gap-10 items-start">
+            <div>
           <div className="flex gap-2 mb-8">
             {requestForm.steps.map((label, i) => (
               <div
@@ -158,6 +164,11 @@ export default function Request() {
               )}
             </div>
           </form>
+            </div>
+            <div className="hidden lg:flex justify-center sticky top-28 pt-4">
+              <PrismaMascot variant="hello" size="xl" floating />
+            </div>
+          </div>
         </div>
       </section>
     </>

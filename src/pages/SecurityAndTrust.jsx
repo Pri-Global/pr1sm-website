@@ -4,6 +4,7 @@ import BookCallCTA from '../components/ui/BookCallCTA'
 import AnimatedIcon from '../components/ui/AnimatedIcon'
 import GradientOrb from '../components/animations/GradientOrb'
 import { StaggerContainer, StaggerItem } from '../components/animations/StaggerGroup'
+import { ScrollRevealList, ScrollRevealItem } from '../components/animations/ScrollReveal'
 import { security } from '../data/pages'
 import { getIcon, dotClasses, iconBgClasses } from '../utils/pageIcons'
 
@@ -43,16 +44,14 @@ export default function SecurityAndTrust() {
             label={security.commitment.label}
             title={security.commitment.heading}
           />
-          <StaggerContainer className="space-y-3">
+          <ScrollRevealList className="space-y-3">
             {security.commitment.items.map((item, i) => (
-              <StaggerItem key={item}>
-                <li className="feature-item text-white/75 list-none !py-4">
-                  <span className={dotClasses[i % dotClasses.length]} />
-                  {item}
-                </li>
-              </StaggerItem>
+              <ScrollRevealItem key={item} as="li" className="feature-item text-white/75 list-none !py-4">
+                <span className={dotClasses[i % dotClasses.length]} />
+                {item}
+              </ScrollRevealItem>
             ))}
-          </StaggerContainer>
+          </ScrollRevealList>
         </div>
       </section>
 

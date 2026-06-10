@@ -15,12 +15,12 @@ export default function BookCallCTA({ heading, subheading, className = '' }) {
   const text = subheading || DEFAULT_SUBHEADING
 
   return (
-    <section className={`relative section-padding section-default overflow-hidden ${className}`}>
+    <section className={`relative section-padding section-default overflow-x-clip ${className}`}>
       <GradientOrb color="blue" size={480} top="-120px" right="-100px" opacity={0.55} className="hidden sm:block" />
       <GradientOrb color="purple" size={360} bottom="-80px" left="-60px" opacity={0.45} className="hidden sm:block" />
 
       <div className="container-wide relative z-10">
-        <div className="cta-panel">
+        <div className="cta-panel relative">
           <div className="cta-panel-grid absolute inset-0 opacity-[0.35]" aria-hidden="true" />
           <div className="relative grid lg:grid-cols-[1.2fr_0.8fr] gap-6 sm:gap-8 lg:gap-14 items-center p-5 sm:p-8 md:p-12 lg:p-14">
             <div>

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import PageHero from '../components/ui/PageHero'
+import { ScrollRevealList, ScrollRevealItem } from '../components/animations/ScrollReveal'
 import { legalPages, footerLegalLinks } from '../data/legal'
 
 function renderParagraph(text) {
@@ -42,9 +43,9 @@ export default function LegalPage({ type }) {
       <PageHero title={page.title} subtitle={`Last updated: ${page.lastUpdated}`} eyebrow={page.eyebrow} />
       <section className="section-alt section-padding">
         <div className="container-wide max-w-3xl">
-          <div className="space-y-10">
+          <ScrollRevealList className="space-y-10">
             {page.sections.map((section) => (
-              <div key={section.heading}>
+              <ScrollRevealItem key={section.heading}>
                 <h2 className="font-heading font-bold text-xl text-white mb-3">{section.heading}</h2>
                 <div className="space-y-3">
                   {section.body.map((paragraph) => (
@@ -53,9 +54,9 @@ export default function LegalPage({ type }) {
                     </p>
                   ))}
                 </div>
-              </div>
+              </ScrollRevealItem>
             ))}
-          </div>
+          </ScrollRevealList>
 
           <div className="mt-12 pt-8 border-t border-white/[0.08] flex flex-wrap gap-4">
             {footerLegalLinks.map((link) => (

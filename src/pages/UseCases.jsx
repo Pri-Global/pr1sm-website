@@ -2,7 +2,7 @@ import PageHero from '../components/ui/PageHero'
 import SectionHeader from '../components/ui/SectionHeader'
 import BookCallCTA from '../components/ui/BookCallCTA'
 import GradientOrb from '../components/animations/GradientOrb'
-import { StaggerContainer, StaggerItem } from '../components/animations/StaggerGroup'
+import { ScrollRevealList, ScrollRevealItem } from '../components/animations/ScrollReveal'
 import { useCaseCategories } from '../data/useCases'
 import { accentStyles, dotClasses } from '../utils/pageIcons'
 
@@ -45,29 +45,25 @@ export default function UseCases() {
                       </div>
                       <div>
                         <p className="uc-label">Solution</p>
-                        <StaggerContainer className="mt-2 space-y-2">
+                        <ScrollRevealList className="mt-2 space-y-2">
                           {uc.solution.map((s, si) => (
-                            <StaggerItem key={s}>
-                              <li className="feature-item !p-2.5 text-white/60 text-sm list-none">
-                                <span className={dotClasses[si % dotClasses.length]} />
-                                {s}
-                              </li>
-                            </StaggerItem>
+                            <ScrollRevealItem key={s} as="li" className="feature-item !p-2.5 text-white/60 text-sm list-none">
+                              <span className={dotClasses[si % dotClasses.length]} />
+                              {s}
+                            </ScrollRevealItem>
                           ))}
-                        </StaggerContainer>
+                        </ScrollRevealList>
                       </div>
                       <div>
                         <p className="uc-label">Outcomes</p>
-                        <StaggerContainer className="mt-2 space-y-2">
+                        <ScrollRevealList className="mt-2 space-y-2">
                           {uc.outcomes.map((o, oi) => (
-                            <StaggerItem key={o}>
-                              <li className="feature-item !p-2.5 text-sm list-none" style={{ color: accent.text }}>
-                                <span className={dotClasses[(oi + 1) % dotClasses.length]} />
-                                {o}
-                              </li>
-                            </StaggerItem>
+                            <ScrollRevealItem key={o} as="li" className="feature-item !p-2.5 text-sm list-none" style={{ color: accent.text }}>
+                              <span className={dotClasses[(oi + 1) % dotClasses.length]} />
+                              {o}
+                            </ScrollRevealItem>
                           ))}
-                        </StaggerContainer>
+                        </ScrollRevealList>
                       </div>
                     </div>
                   </div>

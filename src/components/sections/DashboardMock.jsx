@@ -1,5 +1,5 @@
 import { dashboardPreview } from '../../data/home'
-import { StaggerContainer, StaggerItem } from '../animations/StaggerGroup'
+import { ScrollRevealList, ScrollRevealItem } from '../animations/ScrollReveal'
 
 export default function DashboardMock() {
   return (
@@ -28,29 +28,25 @@ export default function DashboardMock() {
             <p className="text-white font-medium text-sm">AI Insights</p>
             <span className="badge-blue !py-0.5 !text-[9px]">2 new</span>
           </div>
-          <StaggerContainer className="space-y-2">
+          <ScrollRevealList className="space-y-2">
             {dashboardPreview.aiInsights.map((item) => (
-              <StaggerItem key={item}>
-                <li className="text-white/50 text-xs leading-relaxed flex gap-2 list-none">
-                  <span className="feature-dot-blue !mt-1.5" />
-                  {item}
-                </li>
-              </StaggerItem>
+              <ScrollRevealItem key={item} as="li" className="text-white/50 text-xs leading-relaxed flex gap-2 list-none">
+                <span className="feature-dot-blue !mt-1.5" />
+                {item}
+              </ScrollRevealItem>
             ))}
-          </StaggerContainer>
+          </ScrollRevealList>
         </div>
         <div className="bg-white/[0.03] border border-white/[0.08] rounded-xl p-4">
           <p className="text-white font-medium text-sm mb-3">Recent Alerts</p>
-          <StaggerContainer className="space-y-2">
+          <ScrollRevealList className="space-y-2">
             {dashboardPreview.alerts.map((item) => (
-              <StaggerItem key={item}>
-                <li className="text-white/50 text-xs leading-relaxed flex gap-2 list-none">
-                  <span className="feature-dot-purple !mt-1.5" />
-                  {item}
-                </li>
-              </StaggerItem>
+              <ScrollRevealItem key={item} as="li" className="text-white/50 text-xs leading-relaxed flex gap-2 list-none">
+                <span className="feature-dot-purple !mt-1.5" />
+                {item}
+              </ScrollRevealItem>
             ))}
-          </StaggerContainer>
+          </ScrollRevealList>
         </div>
       </div>
     </div>

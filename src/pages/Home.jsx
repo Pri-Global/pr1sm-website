@@ -4,12 +4,12 @@ import Button from '../components/ui/Button'
 import SectionLabel from '../components/ui/SectionLabel'
 import DashboardMock from '../components/sections/DashboardMock'
 import BookCallCTA from '../components/ui/BookCallCTA'
-import IntelligenceDiagram from '../components/sections/IntelligenceDiagram'
 import AnimatedIcon from '../components/ui/AnimatedIcon'
 import MorphingText from '../components/animations/MorphingText'
 import GradientOrb from '../components/animations/GradientOrb'
 import AnimatedStat from '../components/animations/AnimatedStat'
 import TestimonialVideo from '../components/ui/TestimonialVideo'
+import PrismaMascot from '../components/ui/PrismaMascot'
 import { industryIconMap } from '../components/icons/IndustryIcons'
 import { StaggerContainer, StaggerItem } from '../components/animations/StaggerGroup'
 import {
@@ -33,14 +33,14 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center text-white overflow-hidden">
+      <section className="relative min-h-screen flex items-center text-white overflow-x-clip">
         <div className="absolute inset-0 pointer-events-none z-0">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[350px] hero-glow-main" />
           <div className="absolute top-16 left-8 w-[250px] h-[250px] hero-glow-secondary" />
         </div>
         <div className="relative z-10 container-wide section-padding pt-28 sm:pt-32 pb-16 sm:pb-20 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
-            <div>
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] xl:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 2xl:gap-20 items-center">
+            <div className="max-w-2xl xl:max-w-none">
               <div className="eyebrow-badge mb-3">
                 <span className="eyebrow-dot" />
                 {hero.badge.line1}
@@ -53,7 +53,7 @@ export default function Home() {
                 <MorphingText words={morphWords} />
               </h1>
               <p className="mt-3 sm:mt-4 font-heading text-lg sm:text-xl md:text-2xl text-white/75">{hero.headline.sub}</p>
-              <p className="mt-4 sm:mt-6 text-base sm:text-lg text-white/60 leading-relaxed max-w-2xl">{hero.subheadline}</p>
+              <p className="mt-4 sm:mt-6 text-base sm:text-lg text-white/60 leading-relaxed max-w-2xl xl:max-w-3xl">{hero.subheadline}</p>
 
               <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
                 <Button to="/request" variant="primary" className="btn-mobile-full !justify-center">
@@ -80,7 +80,9 @@ export default function Home() {
               </StaggerContainer>
             </div>
 
-            <IntelligenceDiagram />
+            <div className="flex justify-center items-end w-full max-w-sm sm:max-w-md mx-auto lg:max-w-none lg:justify-end xl:justify-center">
+              <PrismaMascot variant="hello" size="xl" className="sm:!h-56 md:!h-64 lg:!h-72 xl:!h-[22rem] 2xl:!h-80" />
+            </div>
           </div>
         </div>
       </section>
@@ -115,7 +117,7 @@ export default function Home() {
         <div className="container-wide text-center mb-10">
           <h2 className="font-heading font-bold text-3xl md:text-4xl">{industries.heading}</h2>
         </div>
-        <div className="container-wide grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3 md:gap-4 max-w-6xl mx-auto">
+        <div className="container-wide grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3 md:gap-4 xl:gap-5">
           {industries.items.map((item) => {
             const Icon = industryIconMap[item.icon]
             return (
@@ -158,13 +160,16 @@ export default function Home() {
       <div className="gradient-divider" />
 
       {/* Product Video */}
-      <section className="relative section-alt section-padding overflow-hidden">
+      <section className="relative section-alt section-padding overflow-x-clip">
         <GradientOrb color="gold" size={350} top="20%" right="-120px" opacity={0.5} />
-        <div className="relative z-10 container-wide grid lg:grid-cols-2 gap-12 items-center">
+        <div className="relative z-10 container-wide grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] xl:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
           <div>
             <SectionLabel>{productOverview.label}</SectionLabel>
-            <h2 className="font-heading font-bold text-3xl md:text-4xl tracking-tight text-white">{productOverview.heading}</h2>
+            <h2 className="font-heading font-bold text-2xl sm:text-3xl md:text-4xl tracking-tight text-white">{productOverview.heading}</h2>
             <p className="mt-4 text-white/50 leading-relaxed">{productOverview.body}</p>
+            <div className="mt-6 sm:mt-8 flex justify-center lg:justify-start">
+              <PrismaMascot variant="tagline" size="lg" floating />
+            </div>
           </div>
           <TestimonialVideo
             src={productOverview.videoUrl}

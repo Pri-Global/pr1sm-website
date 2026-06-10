@@ -3,7 +3,7 @@ import SectionHeader from '../components/ui/SectionHeader'
 import BookCallCTA from '../components/ui/BookCallCTA'
 import AnimatedIcon from '../components/ui/AnimatedIcon'
 import GradientOrb from '../components/animations/GradientOrb'
-import { StaggerContainer, StaggerItem } from '../components/animations/StaggerGroup'
+import { ScrollRevealList, ScrollRevealItem } from '../components/animations/ScrollReveal'
 import { useByOutcome } from '../data/useCases'
 import { accentStyles, dotClasses, getIcon } from '../utils/pageIcons'
 
@@ -35,16 +35,14 @@ export default function UseByOutcome() {
                       <p className="mt-1 text-white/55 text-sm leading-relaxed">{outcome.description}</p>
                     </div>
                   </div>
-                  <StaggerContainer className="space-y-2">
+                  <ScrollRevealList className="space-y-2">
                     {outcome.bullets.map((b, i) => (
-                      <StaggerItem key={b}>
-                        <li className="feature-item !p-2.5 text-sm text-white/75 list-none">
-                          <span className={dotClasses[i % dotClasses.length]} />
-                          {b}
-                        </li>
-                      </StaggerItem>
+                      <ScrollRevealItem key={b} as="li" className="feature-item !p-2.5 text-sm text-white/75 list-none">
+                        <span className={dotClasses[i % dotClasses.length]} />
+                        {b}
+                      </ScrollRevealItem>
                     ))}
-                  </StaggerContainer>
+                  </ScrollRevealList>
                 </div>
               )
             })}
