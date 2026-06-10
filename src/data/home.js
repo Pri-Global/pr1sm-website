@@ -4,9 +4,12 @@ export const hero = {
     line2: '29+ YEARS IN ENTERPRISE TECHNOLOGY',
   },
   headline: {
-    line1: 'Turn Your Data Into',
-    highlight: 'Decisions. Instantly.',
-    sub: 'Launch in weeks, not months.',
+    line1: 'Turn your Data Into',
+    morphLines: [
+      'Decisions. Instantly.',
+      'Launch in weeks, not months.',
+      'Your Existing Systems. Unified by AI.',
+    ],
   },
   subheadline:
     'PR1SM sits on top of your existing systems — ask anything by voice or text and get secure answers in seconds.',

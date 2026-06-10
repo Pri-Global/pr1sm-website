@@ -3,8 +3,9 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 export default function MorphingText({
   words,
-  interval = 2500,
+  interval = 3000,
   className = 'text-gradient',
+  block = false,
 }) {
   const [index, setIndex] = useState(0)
   const [reducedMotion, setReducedMotion] = useState(false)
@@ -28,19 +29,23 @@ export default function MorphingText({
   }, [words.length, interval, reducedMotion])
 
   if (reducedMotion) {
-    return <span className={className}>{words[0]}</span>
+    return <span className={`${block ? 'block' : 'inline-block'} ${className}`}>{words[0]}</span>
   }
 
   return (
-    <span className="inline-block relative">
+    <span
+      className={`relative ${block ? 'block min-h-[1.15em] sm:min-h-[1.1em]' : 'inline-block'}`}
+      style={{ perspective: block ? '800px' : undefined }}
+    >
       <AnimatePresence mode="wait">
         <motion.span
           key={words[index]}
-          className={`inline-block ${className}`}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.4, ease: 'easeInOut' }}
+          className={`${block ? 'block' : 'inline-block'} ${className}`}
+          initial={{ opacity: 0, rotateX: block ? -75 : 0, y: block ? 0 : 12 }}
+          animate={{ opacity: 1, rotateX: 0, y: 0 }}
+          exit={{ opacity: 0, rotateX: block ? 75 : 0, y: block ? 0 : -12 }}
+          transition={{ duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] }}
+          style={{ transformOrigin: block ? 'center top' : 'center bottom' }}
         >
           {words[index]}
         </motion.span>

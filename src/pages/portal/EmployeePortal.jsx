@@ -71,6 +71,10 @@ export default function EmployeePortal() {
         setError('Incorrect password. Please try again.')
       } else if (message.includes('Email not confirmed')) {
         setError('Please check your email and confirm your account first.')
+      } else if (/invalid api key/i.test(message)) {
+        setError(
+          'Supabase API key rejected. In Vercel, set VITE_SUPABASE_ANON_KEY to the legacy anon key (starts with eyJ…) from Supabase → Settings → API, then redeploy.',
+        )
       } else {
         setError(message || 'Something went wrong. Please try again.')
       }

@@ -9,13 +9,6 @@ import { hero } from '../../data/home'
 
 const valueIcons = { Shield, Plug, BarChart3 }
 const dotClasses = ['feature-dot-blue', 'feature-dot-purple', 'feature-dot-gold']
-const morphWords = [
-  hero.headline.highlight,
-  'Your Business.',
-  'Your Team.',
-  'Your Data.',
-  'Your Future.',
-]
 
 export default function HeroContent() {
   const rootRef = useRef(null)
@@ -31,8 +24,7 @@ export default function HeroContent() {
         .from('[data-hero="badge-sub"]', { opacity: 0, y: 16, duration: 0.5 }, 0.1)
         .from('[data-hero="line1"]', { opacity: 0, y: 60, duration: 0.8 }, 0.15)
         .from('[data-hero="morph"]', { opacity: 0, y: 60, duration: 0.8 }, 0.35)
-        .from('[data-hero="sub"]', { opacity: 0, y: 20, duration: 0.7 }, 0.55)
-        .from('[data-hero="body"]', { opacity: 0, y: 20, duration: 0.7 }, 0.75)
+        .from('[data-hero="body"]', { opacity: 0, y: 20, duration: 0.7 }, 0.55)
         .from('[data-hero="prop"]', { opacity: 0, x: -20, duration: 0.5, stagger: 0.1 }, 1)
         .from('[data-hero="mascot"]', { opacity: 0, scale: 0.92, y: 30, duration: 1 }, 0.5)
     }, rootRef)
@@ -52,14 +44,11 @@ export default function HeroContent() {
             {hero.badge.line2}
           </p>
           <h1 className="font-heading font-extrabold text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-[1.05] text-white">
-            <span data-hero="line1" className="inline-block">{hero.headline.line1}{' '}</span>
-            <span data-hero="morph" className="inline-block text-gradient-animated">
-              <MorphingText words={morphWords} />
+            <span data-hero="line1" className="block">{hero.headline.line1}</span>
+            <span data-hero="morph" className="block text-gradient-animated mt-1">
+              <MorphingText words={hero.headline.morphLines} block />
             </span>
           </h1>
-          <p data-hero="sub" className="mt-3 sm:mt-4 font-heading text-lg sm:text-xl md:text-2xl text-white/75">
-            {hero.headline.sub}
-          </p>
           <p data-hero="body" className="mt-4 sm:mt-6 text-base sm:text-lg text-white/60 leading-relaxed max-w-2xl xl:max-w-3xl">
             {hero.subheadline}
           </p>
