@@ -777,6 +777,89 @@
   .btn-mobile-full {
     @apply w-full sm:w-auto;
   }
+
+  .portal-dropdown {
+    background: rgba(13, 27, 62, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(65, 105, 225, 0.2);
+    border-radius: 14px;
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .portal-dropdown-item:hover {
+    background: rgba(65, 105, 225, 0.1);
+    border: 1px solid rgba(65, 105, 225, 0.2);
+  }
+
+  .portal-user-btn:hover {
+    border-color: rgba(65, 105, 225, 0.5);
+    background: rgba(65, 105, 225, 0.1);
+  }
+
+  .portal-card {
+    background: rgba(13, 27, 62, 0.7);
+  }
+
+  .portal-login-card {
+    background: rgba(13, 27, 62, 0.6);
+    box-shadow:
+      0 30px 80px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(65, 105, 225, 0.1);
+  }
+
+  .portal-login-card-blue {
+    border-color: rgba(65, 105, 225, 0.2);
+  }
+
+  .portal-login-card-purple {
+    border-color: rgba(123, 47, 190, 0.2);
+    box-shadow:
+      0 30px 80px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(123, 47, 190, 0.1);
+  }
+
+  .portal-input {
+    @apply rounded-[10px] px-4 py-3 text-sm text-white outline-none transition-all duration-200;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .portal-input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .portal-input:focus {
+    border-color: rgba(65, 105, 225, 0.6);
+    box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.15);
+  }
+
+  .portal-input-purple:focus {
+    border-color: rgba(123, 47, 190, 0.6);
+    box-shadow: 0 0 0 3px rgba(123, 47, 190, 0.15);
+  }
+
+  .portal-submit-btn {
+    @apply rounded-[10px] py-3.5 text-[15px] font-medium text-white transition-all duration-200;
+    background: linear-gradient(135deg, #4169e1, #7b2fbe);
+    box-shadow: 0 0 30px rgba(65, 105, 225, 0.3);
+  }
+
+  .portal-submit-btn:hover:not(:disabled) {
+    box-shadow: 0 0 50px rgba(65, 105, 225, 0.5);
+    transform: translateY(-1px);
+  }
+
+  .portal-submit-btn-purple {
+    background: linear-gradient(135deg, #7b2fbe, #4169e1);
+    box-shadow: 0 0 30px rgba(123, 47, 190, 0.3);
+  }
+
+  .portal-submit-btn-purple:hover:not(:disabled) {
+    box-shadow: 0 0 50px rgba(123, 47, 190, 0.5);
+  }
 }
 
 @media (max-width: 639px) {

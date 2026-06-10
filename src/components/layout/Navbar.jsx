@@ -2,10 +2,11 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { motion, useSpring, useTransform } from 'framer-motion'
 import gsap from 'gsap'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import { Briefcase, Menu, Users, X, ChevronDown } from 'lucide-react'
 import Logo from '../ui/Logo'
 import AnimatedIcon from '../ui/AnimatedIcon'
 import Button from '../ui/Button'
+import PortalDropdown from '../ui/PortalDropdown'
 import { useLenis } from '../../context/LenisContext'
 import { aboutDropdown, navLinks, BOOK_CALL_ROUTE } from '../../data/navigation'
 
@@ -141,20 +142,24 @@ export default function Navbar() {
           ))}
         </div>
 
-        <div className="hidden lg:block">
+        <div className="hidden lg:flex items-center gap-3">
+          <PortalDropdown onNavigate={closeMobile} />
           <Button to={BOOK_CALL_ROUTE} variant="primary" className="!py-2.5 !px-5 text-sm">
             Book a Call
           </Button>
         </div>
 
-        <button
+        <div className="flex items-center gap-2 lg:hidden">
+          <PortalDropdown onNavigate={closeMobile} />
+          <button
           type="button"
           className="group lg:hidden text-white p-2"
           onClick={() => setMobileOpen((o) => !o)}
           aria-label="Toggle menu"
         >
           {mobileOpen ? <AnimatedIcon Icon={X} size={24} /> : <AnimatedIcon Icon={Menu} size={24} />}
-        </button>
+          </button>
+        </div>
       </nav>
 
       {mobileOpen && (
@@ -182,6 +187,29 @@ export default function Navbar() {
               {link.label}
             </NavLink>
           ))}
+
+          <p className="text-xs uppercase tracking-widest text-white/35 mt-5 mb-2">Portals</p>
+          <NavLink
+            to="/portal/client"
+            onClick={closeMobile}
+            className="flex items-center gap-3 py-2 text-sm text-white/70 hover:text-blue-light"
+          >
+            <span className="w-8 h-8 rounded-lg bg-blue/15 flex items-center justify-center">
+              <AnimatedIcon Icon={Briefcase} size={16} className="text-blue-light" />
+            </span>
+            Client Portal
+          </NavLink>
+          <NavLink
+            to="/portal/employee"
+            onClick={closeMobile}
+            className="flex items-center gap-3 py-2 text-sm text-white/70 hover:text-purple-light"
+          >
+            <span className="w-8 h-8 rounded-lg bg-purple/15 flex items-center justify-center">
+              <AnimatedIcon Icon={Users} size={16} className="text-purple-light" />
+            </span>
+            Employee Portal
+          </NavLink>
+
           <Button to={BOOK_CALL_ROUTE} variant="primary" className="mt-4 w-full" onClick={closeMobile}>
             Book a Call
           </Button>

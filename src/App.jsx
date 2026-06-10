@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { BrowserRouter, useLocation, useRoutes, Navigate } from 'react-router-dom'
+import { useLocation, useRoutes, Navigate } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import ScrollToTop from './components/ScrollToTop'
 import SEO from './components/SEO'
@@ -9,7 +9,10 @@ import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import CookieConsent from './components/ui/CookieConsent'
 import PageTransition from './components/ui/PageTransition'
+import AuthRedirect from './components/auth/AuthRedirect'
+import ProtectedRoute, { SetupRoute } from './components/auth/ProtectedRoute'
 import { LenisProvider } from './context/LenisContext'
+import { isPortalStandalone } from './utils/portalRoutes'
 import Home from './pages/Home'
 import About from './pages/About'
 import HowItWorks from './pages/HowItWorks'
@@ -24,6 +27,12 @@ import Testimonials from './pages/Testimonials'
 import Request from './pages/Request'
 import LegalPage from './pages/LegalPage'
 import NotFound from './pages/NotFound'
+import PortalSelector from './pages/PortalSelector'
+import ClientPortal from './pages/ClientPortal'
+import ClientDashboard from './pages/ClientDashboard'
+import EmployeePortal from './pages/portal/EmployeePortal'
+import PasswordSetup from './pages/portal/PasswordSetup'
+import EmployeeDashboard from './pages/portal/EmployeeDashboard'
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -70,6 +79,12 @@ const routes = [
   { path: '/leadership', element: <Leadership /> },
   { path: '/testimonials', element: <Testimonials /> },
   { path: '/request', element: <Request /> },
+  { path: '/portal', element: <PortalSelector /> },
+  { path: '/portal/client', element: <ClientPortal /> },
+  { path: '/portal/client/dashboard', element: <ClientDashboard /> },
+  { path: '/portal/employee', element: <EmployeePortal /> },
+  { path: '/portal/employee/setup', element: <SetupRoute><PasswordSetup /></SetupRoute> },
+  { path: '/portal/employee/dashboard', element: <ProtectedRoute><EmployeeDashboard /></ProtectedRoute> },
   { path: '/legal', element: <LegalPage type="legal" /> },
   { path: '/privacy', element: <LegalPage type="privacy" /> },
   { path: '/cookies', element: <LegalPage type="cookies" /> },
@@ -86,6 +101,11 @@ const routes = [
 function AnimatedRoutes() {
   const location = useLocation()
   const element = useRoutes(routes, location)
+  const standalone = isPortalStandalone(location.pathname)
+
+  if (standalone) {
+    return element
+  }
 
   return (
     <AnimatePresence mode="wait">
@@ -97,19 +117,23 @@ function AnimatedRoutes() {
 }
 
 function Layout() {
+  const location = useLocation()
+  const standalone = isPortalStandalone(location.pathname)
+
   return (
     <ErrorBoundary>
-      <div className="noise">
-        <SiteBackground />
-        <CustomCursor />
+      <div className={standalone ? '' : 'noise'}>
+        {!standalone && <SiteBackground />}
+        {!standalone && <CustomCursor />}
         <SEO />
         <ScrollToTop />
-        <Navbar />
+        <AuthRedirect />
+        {!standalone && <Navbar />}
         <main className="relative z-10" id="main-content">
           <AnimatedRoutes />
         </main>
-        <Footer />
-        <CookieConsent />
+        {!standalone && <Footer />}
+        {!standalone && <CookieConsent />}
       </div>
     </ErrorBoundary>
   )
@@ -117,10 +141,8 @@ function Layout() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <LenisProvider>
-        <Layout />
-      </LenisProvider>
-    </BrowserRouter>
+    <LenisProvider>
+      <Layout />
+    </LenisProvider>
   )
 }
