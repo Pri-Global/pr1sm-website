@@ -129,7 +129,7 @@ function Layout() {
         <ScrollToTop />
         <AuthRedirect />
         {!standalone && <Navbar />}
-        <main className="relative z-10" id="main-content">
+        <main className="relative z-10" id="main-content" style={{ perspective: '1500px' }}>
           <AnimatedRoutes />
         </main>
         {!standalone && <Footer />}

@@ -321,23 +321,23 @@
   }
 
   .section-default {
-    @apply bg-navy;
+    background: transparent;
   }
 
   .section-alt {
-    background: rgba(10, 16, 32, 0.82);
+    background: transparent;
   }
 
   .section-elevated {
-    background: rgba(13, 27, 62, 0.78);
+    background: transparent;
   }
 
   .section-gradient {
-    background: linear-gradient(180deg, rgba(10, 16, 32, 0.88) 0%, rgba(13, 27, 62, 0.85) 100%);
+    background: transparent;
   }
 
   .stats-bar {
-    background: rgba(13, 27, 62, 0.6);
+    background: transparent;
     @apply border-y border-white/[0.06];
   }
 

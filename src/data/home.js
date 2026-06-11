@@ -5,9 +5,9 @@ export const hero = {
   },
   headline: {
     phrases: [
-      { line1: 'Turn your Data Into', line2: 'Decisions. Instantly.' },
-      { line1: 'Launch in weeks,', line2: 'not months.' },
-      { line1: 'Your Existing Systems.', line2: 'Unified by AI.' },
+      { line1: 'Turn Your Data', line2: 'Into Decisions.' },
+      { line1: 'Launch in Weeks,', line2: 'Not Months.' },
+      { line1: 'Your Systems,', line2: 'Unified by AI.' },
     ],
   },
   subheadline:
