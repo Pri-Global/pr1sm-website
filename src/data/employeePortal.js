@@ -1,3 +1,5 @@
+import { BOOK_CALL_URL } from './navigation'
+
 export const ALLOWED_EMAILS = [
   'hetvi@pr1sm.ai',
   'jashwanth@pr1sm.ai',
@@ -33,7 +35,7 @@ export const RESOURCE_CATEGORIES = [
     title: 'Sales & CRM',
     resources: [
       { title: 'HubSpot CRM', icon: 'BarChart2', desc: 'Client contacts & deal pipeline', href: 'https://app.hubspot.com' },
-      { title: 'Discovery Call Booking', icon: 'Calendar', desc: 'Book a client demo call', href: 'https://meetings.hubspot.com/priglobal/discovery' },
+      { title: 'Discovery Call Booking', icon: 'Calendar', desc: 'Book a 15-minute call', href: BOOK_CALL_URL },
     ],
   },
   {
@@ -52,7 +54,7 @@ export const RESOURCES = RESOURCE_CATEGORIES.flatMap((c) => c.resources)
 export const AI_TOOLS = [
   { title: 'PR1SM.AI', desc: 'Enterprise AI Platform', href: 'https://pr1sm-website.vercel.app', icon: 'Brain', badge: 'Live', color: 'purple' },
   { title: 'PRI Global', desc: 'Main company website', href: 'https://pri-global.vercel.app', icon: 'Globe', color: 'blue' },
-  { title: 'HubSpot', desc: 'CRM & meetings', href: 'https://meetings.hubspot.com/priglobal/discovery', icon: 'BarChart2', color: 'gold' },
+  { title: 'Book a Call', desc: '15-minute Outlook booking', href: BOOK_CALL_URL, icon: 'Calendar', color: 'gold' },
   { title: 'LinkedIn', desc: 'PR1SM.AI company page', href: 'https://linkedin.com/company/pr1sm-ai', icon: 'Link2', color: 'blue' },
   { title: 'GitHub', desc: 'Website source repository', href: 'https://github.com/Pri-Global/pr1sm-website', icon: 'GitFork', color: 'purple' },
   { title: 'ChatGPT', desc: 'General AI assistant', href: 'https://chat.openai.com', icon: 'MessageSquare', color: 'teal' },

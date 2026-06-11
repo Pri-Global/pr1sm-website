@@ -42,4 +42,5 @@ export const navLinks = [
   { label: 'Testimonials', to: '/testimonials' },
 ]
 
+export const BOOK_CALL_URL = 'https://outlook.office.com/book/PRIGlobalBookingpage@priglobal.com/?ismsaljsauthenabled'
 export const BOOK_CALL_ROUTE = '/request'

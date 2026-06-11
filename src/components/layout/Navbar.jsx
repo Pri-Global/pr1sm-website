@@ -8,7 +8,7 @@ import AnimatedIcon from '../ui/AnimatedIcon'
 import Button from '../ui/Button'
 import PortalDropdown from '../ui/PortalDropdown'
 import { useLenis } from '../../context/LenisContext'
-import { aboutDropdown, navLinks, BOOK_CALL_ROUTE } from '../../data/navigation'
+import { aboutDropdown, navLinks, BOOK_CALL_URL } from '../../data/navigation'
 
 export default function Navbar() {
   const lenis = useLenis()
@@ -144,7 +144,7 @@ export default function Navbar() {
 
         <div className="hidden lg:flex items-center gap-3">
           <PortalDropdown onNavigate={closeMobile} />
-          <Button to={BOOK_CALL_ROUTE} variant="primary" className="!py-2.5 !px-5 text-sm">
+          <Button href={BOOK_CALL_URL} variant="primary" className="!py-2.5 !px-5 text-sm">
             Book a Call
           </Button>
         </div>
@@ -210,7 +210,7 @@ export default function Navbar() {
             Employee Portal
           </NavLink>
 
-          <Button to={BOOK_CALL_ROUTE} variant="primary" className="mt-4 w-full" onClick={closeMobile}>
+          <Button href={BOOK_CALL_URL} variant="primary" className="mt-4 w-full" onClick={closeMobile}>
             Book a Call
           </Button>
         </div>

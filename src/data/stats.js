@@ -1,3 +1,5 @@
+import { BOOK_CALL_URL } from './navigation'
+
 export const stats = [
   { value: 300, suffix: '+', label: 'Successful Projects' },
   { value: 96, suffix: '%', label: 'Client Retention Rate' },
@@ -99,4 +101,4 @@ export const blogPosts = [
   },
 ]
 
-export const HUBSPOT_MEETING = 'https://meetings.hubspot.com/priglobal/discovery'
+export const HUBSPOT_MEETING = BOOK_CALL_URL

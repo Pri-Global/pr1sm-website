@@ -6,6 +6,7 @@ import AnimatedIcon from '../ui/AnimatedIcon'
 import MorphingText from '../animations/MorphingText'
 import PrismaMascot from '../ui/PrismaMascot'
 import { hero } from '../../data/home'
+import { BOOK_CALL_URL } from '../../data/navigation'
 
 const valueIcons = { Shield, Plug, BarChart3 }
 const dotClasses = ['feature-dot-blue', 'feature-dot-purple', 'feature-dot-gold']
@@ -54,7 +55,7 @@ export default function HeroContent() {
 
           <div data-hero="cta" className="mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 relative z-10">
             <Button
-              to="/request"
+              href={BOOK_CALL_URL}
               variant="primary"
               data-hero="cta-primary"
               className="btn-mobile-full btn-shine !justify-center relative z-10"

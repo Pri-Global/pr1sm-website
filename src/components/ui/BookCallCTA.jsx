@@ -4,6 +4,7 @@ import SectionLabel from './SectionLabel'
 import AnimatedIcon from './AnimatedIcon'
 import FloatingOrbs from '../animations/FloatingOrbs'
 import { SectionReveal, SplitHeadline } from '../animations/SectionReveal'
+import { BOOK_CALL_URL } from '../../data/navigation'
 
 const DEFAULT_HEADING = 'Ready to see PR1SM in action?'
 const DEFAULT_SUBHEADING =
@@ -54,11 +55,11 @@ export default function BookCallCTA({ heading, subheading, className = '' }) {
                     <AnimatedIcon Icon={Calendar} size={18} className="text-white" />
                   </span>
                   <div>
-                    <p className="font-heading font-semibold text-white text-sm">30-minute demo</p>
+                    <p className="font-heading font-semibold text-white text-sm">15-minute call</p>
                     <p className="text-white/45 text-xs">No commitment required</p>
                   </div>
                 </div>
-                <Button to="/request" variant="primary" className="btn-shine w-full !justify-center !px-10 !py-4 !text-lg glow-blue">
+                <Button href={BOOK_CALL_URL} variant="primary" className="btn-shine w-full !justify-center !px-10 !py-4 !text-lg glow-blue">
                   Book a Call <AnimatedIcon Icon={ArrowRight} size={18} />
                 </Button>
                 <Button to="/our-platform" variant="ghost" className="btn-glass w-full !justify-center mt-3">
