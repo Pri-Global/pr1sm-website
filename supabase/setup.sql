@@ -60,6 +60,11 @@ CREATE POLICY "All employees can view announcements"
   ON public.announcements FOR SELECT
   TO authenticated USING (true);
 
+DROP POLICY IF EXISTS "All employees can post announcements" ON public.announcements;
+CREATE POLICY "All employees can post announcements"
+  ON public.announcements FOR INSERT
+  TO authenticated WITH CHECK (true);
+
 INSERT INTO public.announcements (title, content, priority)
 SELECT * FROM (VALUES
   ('Welcome to PR1SM Employee Portal', 'This is your central hub for team resources, AI tools, and company updates.', 'high'),

@@ -84,7 +84,7 @@ const routes = [
   { path: '/portal/client/dashboard', element: <ClientDashboard /> },
   { path: '/portal/employee', element: <EmployeePortal /> },
   { path: '/portal/employee/setup', element: <SetupRoute><PasswordSetup /></SetupRoute> },
-  { path: '/portal/employee/dashboard', element: <ProtectedRoute><EmployeeDashboard /></ProtectedRoute> },
+  { path: '/portal/employee/dashboard/*', element: <ProtectedRoute><EmployeeDashboard /></ProtectedRoute> },
   { path: '/legal', element: <LegalPage type="legal" /> },
   { path: '/privacy', element: <LegalPage type="privacy" /> },
   { path: '/cookies', element: <LegalPage type="cookies" /> },

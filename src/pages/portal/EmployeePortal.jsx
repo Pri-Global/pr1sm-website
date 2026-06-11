@@ -7,7 +7,7 @@ import AnimatedIcon from '../../components/ui/AnimatedIcon'
 import FloatingOrbs from '../../components/animations/FloatingOrbs'
 import { useAuth } from '../../contexts/AuthContext'
 import { ALLOWED_EMAILS } from '../../data/employeePortal'
-import { isSupabaseConfigured } from '../../lib/supabase'
+import { isSupabaseConfigured, supabase } from '../../lib/supabase'
 
 const cardEnter = {
   initial: { opacity: 0, y: 30, scale: 0.97 },
@@ -25,6 +25,8 @@ export default function EmployeePortal() {
   const [error, setError] = useState('')
   const [emailBlurred, setEmailBlurred] = useState(false)
   const [shake, setShake] = useState(false)
+  const [resetSent, setResetSent] = useState(false)
+  const [resetLoading, setResetLoading] = useState(false)
 
   const normalizedEmail = email.trim().toLowerCase()
   const isUnauthorizedEmail = emailBlurred && normalizedEmail && !ALLOWED_EMAILS.includes(normalizedEmail)
@@ -84,6 +86,34 @@ export default function EmployeePortal() {
     }
   }
 
+  const handleForgotPassword = async () => {
+    setError('')
+
+    if (!normalizedEmail || !ALLOWED_EMAILS.includes(normalizedEmail)) {
+      setError('Enter your work email above first, then click "Forgot password?".')
+      setEmailBlurred(true)
+      return
+    }
+
+    if (!isSupabaseConfigured) {
+      setError('Portal authentication is not configured yet. Contact IT.')
+      return
+    }
+
+    try {
+      setResetLoading(true)
+      const { error: resetError } = await supabase.auth.resetPasswordForEmail(normalizedEmail, {
+        redirectTo: `${window.location.origin}/portal/employee/setup`,
+      })
+      if (resetError) throw resetError
+      setResetSent(true)
+    } catch (err) {
+      setError(err?.message || 'Could not send reset email. Please try again.')
+    } finally {
+      setResetLoading(false)
+    }
+  }
+
   return (
     <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-16 sm:py-24 md:py-28 bg-[#080e1e] overflow-x-clip">
       <FloatingOrbs count={2} />
@@ -118,6 +148,12 @@ export default function EmployeePortal() {
               <div className="flex items-start gap-2 rounded-lg border border-red-500/20 bg-red-500/10 px-3.5 py-2.5 text-red-300 text-sm">
                 <AnimatedIcon Icon={AlertCircle} size={16} className="shrink-0 mt-0.5" />
                 <span>{error}</span>
+              </div>
+            )}
+
+            {resetSent && (
+              <div className="rounded-lg border border-purple/20 bg-purple/10 px-3.5 py-2.5 text-purple-light text-sm">
+                Password reset link sent to {normalizedEmail}. Check your inbox.
               </div>
             )}
 
@@ -160,6 +196,17 @@ export default function EmployeePortal() {
                 <AnimatedIcon Icon={showPassword ? EyeOff : Eye} size={18} />
               </button>
             </div>
+
+            <p className="text-right">
+              <button
+                type="button"
+                onClick={handleForgotPassword}
+                disabled={resetLoading}
+                className="text-xs text-white/40 hover:text-purple-light transition-colors disabled:opacity-60"
+              >
+                {resetLoading ? 'Sending…' : 'Forgot password?'}
+              </button>
+            </p>
 
             <button
               type="submit"

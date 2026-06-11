@@ -104,10 +104,9 @@ export default function PasswordSetup() {
               id="full-name"
               type="text"
               autoComplete="name"
-              required
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              placeholder="Your full name"
+              placeholder="Your full name (leave blank to keep current)"
               className="portal-input portal-input-purple w-full"
             />
           </div>
